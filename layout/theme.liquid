@@ -28,6 +28,12 @@
 
     {% render 'meta-tags' %}
 
+    
+    {{ 'snippet-custom-product-card.css' | asset_url | stylesheet_tag }}
+    {{ 'splide.min.css' | asset_url | stylesheet_tag }}
+    <script src="{{ "splide.min.js" | asset_url }}" defer></script>
+    
+    <script src="{{ 'snippet-product-card.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
@@ -293,6 +299,7 @@
 
     {% sections 'header-group' %}
 
+    {% render "breadcrumbs" %}
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
@@ -342,6 +349,7 @@
         playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
         recipientFormExpanded: `{{ 'recipient.form.expanded' | t }}`,
         recipientFormCollapsed: `{{ 'recipient.form.collapsed' | t }}`,
+        countrySelectorSearchCount: `{{ 'localization.country_results_count' | t: count: '[count]' }}`,
       };
     </script>
 
