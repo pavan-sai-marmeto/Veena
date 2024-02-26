@@ -22,7 +22,7 @@
         {% if section.blocks.size > 0  %}
           {% for block in section.blocks %}
             <div class="grid__item">
-                <div class="{{ block.settings.text_alignment }} custom-usp_text color-{{ block.settings.usp_color_scheme }}">
+                <div class="{{ block.settings.text_alignment }} custom-usp_content color-{{ block.settings.usp_color_scheme }}">
                   {% if block.settings.svg_embed != blank %}
                     <div class="custom-usp__icon">
                       {{ block.settings.svg_embed }}

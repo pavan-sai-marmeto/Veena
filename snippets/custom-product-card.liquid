@@ -57,11 +57,6 @@
   </a>
 
   <div class="product-card__content">
-    {% comment %}
-    <div class="jdgm-widget jdgm-preview-badge">
-      {{ product.metafields.judgeme.badge }}
-    </div>
-    {% endcomment %}
     <div class="product-card-varients">
       {% form 'product', product %}
         <input type="hidden" name="id" value="{{ current_varient.id }}">
@@ -72,9 +67,6 @@
               {% assign downcased_option_name = product_option.name | handleize %}
 
               <li>
-                {% comment %}
-                <label>{{ product_option.name }}</label>
-                  {% endcomment %}
                 <ul class="product-card__option">
                   {% for option_value in product_option.values %}
                     <li>
@@ -98,12 +90,6 @@
                             style="background-color: {{ downcased_option_value }};background-image: url({{ swatch_image }});"
                           >
                           </span>
-                        {% comment %}
-                        {% else %}
-                          <span class="product-card__swatch"
-                            data-option-value = "{{ option_value }}"
-                            >{{ option_value }}</span>
-                          {% endcomment %}
                         {% endif %}
 
                       </label>

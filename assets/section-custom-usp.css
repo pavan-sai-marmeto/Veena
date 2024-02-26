@@ -6,7 +6,7 @@
   padding: 0 15px;
 }
 
-.custom-usp_text{
+.custom-usp_content{
   background: none;
 }
 
@@ -19,6 +19,6 @@
 .custom-usp__icon svg{
   transition: transform 0.3s ease;
 }
-.custom-usp__icon:hover svg{
+.custom-usp_content:hover svg{
   transform: scaleX(-1);
 }

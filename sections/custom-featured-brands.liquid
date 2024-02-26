@@ -51,10 +51,18 @@
                     <div class="featured-brands__image">
                       {% if block.settings.image != blank %}
                         {% render "responsive-image" , desktopImage: block.settings.image %}
+                      {% else %}
+                        {% render 'icon-facebook' %}
                       {% endif %}  
                     </div>
                   </li>
                 {% endfor %}
+              {% else %}
+                  {% for i in (1..8) %}
+                    <li class="splide__slide">
+                      {% render 'icon-facebook' %}
+                    </li>
+                  {% endfor %}
               {% endif %}
             </ul>
           </div>
