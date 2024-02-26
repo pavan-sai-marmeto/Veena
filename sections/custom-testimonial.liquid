@@ -54,6 +54,8 @@
                   <div class="testimonial__image"> 
                     {% render "responsive-image", desktopImage: block.settings.image %}
                   </div>
+                {% else %}
+                  {{ 'image' | placeholder_svg_tag }}
                 {% endif %}
                 {% if block.settings.heading != blank %}
                   <h2 class="h4 testimonial__heading"> {{ block.settings.heading }} </h2>
@@ -68,6 +70,15 @@
                 {% endif %}  
   
               </li>
+            {% else %}
+            <li class="splide__slide testimonial__slide global-media-settings {{ section.settings.text_alignment }} color-{{ section.settings.color_scheme }}">
+                <div class="testimonial__image"> 
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+                <h2 class="h4 testimonial__heading">Person Name</h2>
+                <h2 class="h4 testimonial__designation">Add designation</h2>
+                <div class="testimonial__comment">Absolutely love the trendy collection! The quality is unmatched, and each piece tells a unique style story.</div>
+            </li>
             {% endfor %}  
           </ul>
         </div>
