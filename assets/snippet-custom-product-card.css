@@ -145,6 +145,9 @@ span.product-card__swatch {
 .product-card__color-swatch {
   border-radius: 50%;
 }
+.product-card__option input[type='radio']:checked .product-card__color-swatch {
+  box-shadow: 0 0 0 3px white inset;
+}
 
 .product-card__secondary-image{
   position: absolute;
