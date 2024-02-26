@@ -99,7 +99,7 @@
     {% assign optionName = option.name | handleize %}
     <label for="{{ input_id }}"
        {% if  optionName  == "color" %} 
-          class="product-variant-options__color-swatch" style = "background-color: {{ value }}" 
+          class="product-variant-options__color-swatch" style = "background-color: {{ value }};" 
        {%  endif %}  
       >
       {% if  optionName  != "color" %}
