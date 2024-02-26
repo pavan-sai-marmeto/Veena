@@ -199,7 +199,7 @@
                   class="product__sku no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
                   id="Sku-{{ section.id }}"
                   role="status"
-                  {{ block.shopify_attributes }}
+                  {{ block.shopify_attributes }}form
                 >
                   <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
                   {{- product.selected_or_first_available_variant.sku -}}
@@ -469,38 +469,6 @@
                   section_id: section.id,
                   show_pickup_availability: true
                 -%}
-                <style>
-                  .payment-cards{
-                    border-radius: 10px;
-                    border: 1px solid rgba(0,0,0,.1);
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 8px 10px;
-                    align-items: center;
-                  }
-                  .payment-cards-options{
-                      display: flex;
-                      align-items: center;
-                      list-style-type: none;
-                      margin: 0;
-                  }
-
-                      .icon {
-                        width: 3.125em;
-                      }
-                      .visuallyhidden {
-                        border: 0;
-                        clip: rect(0 0 0 0);
-                        height: 1px;
-                        margin: -1px;
-                        overflow: hidden;
-                        padding: 0;
-                        position: absolute;
-                        width: 1px;
-                        white-space: nowrap;
-                      }
-                </style>
-
                 {%- unless shop.enabled_payment_types == empty -%}
                   <span class="visuallyhidden">Supported payment methods</span>
 

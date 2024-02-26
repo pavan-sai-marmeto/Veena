@@ -1500,3 +1500,32 @@ a.product__text {
 .shopify-payment-button__button{
   background: #d03c3f;
 }
+.payment-cards{
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,.1);
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  align-items: center;
+}
+.payment-cards-options{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+}
+
+.icon {
+  width: 3.125em;
+}
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
