@@ -804,7 +804,7 @@
               class="mobile-facets__main has-submenu gradient"
             >
               <div class="nav-menu">
-            {% for link in linklists['sidebar-menu'].links %}
+            {% for link in linklists['collection-menu'].links %}
               <details class="menu-border">
                 <summary >{{ link.title |  link_to: link.url }}  {% if link.links.size > 0 %}
                   <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
