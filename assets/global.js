@@ -1329,6 +1329,7 @@ class VariantSelects extends HTMLElement {
               : this.dataset.section
           }`
         );
+        document.querySelector("#customProductDescription").innerHTML = html.querySelector("#customProductDescription").innerHTML;
         const skuSource = html.getElementById(
           `Sku-${
             this.dataset.originalSection
