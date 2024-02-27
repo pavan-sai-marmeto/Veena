@@ -100,7 +100,7 @@
   text-decoration: line-through;
 }
 
-.lookbook__dot-container:hover  .lookbook__product-container{
+.lookbook__dots:hover + .lookbook__product-container{
   opacity: 1;
   visibility: unset;
   transform: translateX(10px);
