@@ -209,7 +209,6 @@ class QuantityInput extends HTMLElement {
     if (previousValue !== this.input.value)
       this.input.dispatchEvent(this.changeEvent);
   }
-
   validateQtyRules() {
     const value = parseInt(this.input.value);
     if (this.input.min) {
@@ -221,14 +220,14 @@ class QuantityInput extends HTMLElement {
       const max = parseInt(this.input.max);
       const buttonPlus = this.querySelector(".quantity__button[name='plus']");
       buttonPlus.classList.toggle("disabled", value >= max);
-    }
+    }  
+
+    const customBtn = document.querySelector('#addToCartTwo')
+    customBtn.setAttribute('data-quantity', value);
     const addButtonText = document.querySelector('[name="add"] > span');
     const price = document.getElementById(`price-${this.dataset.section}`);
-    // const qty = document.querySelector('[data-cart-quantity]').value;
-    // console.log(qty);
     const currentPrice = price.querySelector('.price-item').textContent;
     const finalPrice = value*parseInt(currentPrice.split("Rs. ")[1].split('.')[0].replace(/,/g, ''));
-    // console.log((parseInt(currentPrice.split("Rs. ")[1].split('.')[0].replace(/,/g, ''))));
     addButtonText.textContent = window.variantStrings.addToCart + " Rs. " + finalPrice;
   }
 }
@@ -1329,6 +1328,9 @@ class VariantSelects extends HTMLElement {
               : this.dataset.section
           }`
         );
+        
+        const customBtn = document.querySelector('#addToCartTwo')
+        customBtn.setAttribute('data-variant-id', html.querySelector('#addToCartTwo').dataset.variantId)
         document.querySelector("#customProductDescription").innerHTML = html.querySelector("#customProductDescription").innerHTML;
         const skuSource = html.getElementById(
           `Sku-${
@@ -1562,3 +1564,35 @@ class CustomSlider extends HTMLElement {
 }
 
 customElements.define("custom-slider", CustomSlider);
+
+//functionality of custom add to cart button with id addTwoCartTwo start
+
+const addToCartButtonEl = document.querySelector('#addToCartTwo');
+  addToCartButtonEl.addEventListener("click", () => {
+
+    console.log(addToCartButtonEl.dataset.quantity)
+    console.log(addToCartButtonEl.dataset.variantId)
+    let formData = {
+      'items': [{
+        'id': addToCartButtonEl.dataset.variantId,
+        'quantity': addToCartButtonEl.dataset.quantity
+        }],
+        "sections": addToCartButtonEl.dataset.section
+      };
+      
+      fetch(window.Shopify.routes.root + 'cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      }); 
+})
+
+//custom add to cart button with id addTwoCartTwo end

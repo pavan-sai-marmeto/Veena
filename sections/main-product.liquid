@@ -19,6 +19,34 @@
   {%- endif -%}
 
   {%- style -%}
+  {% for block in section.blocks %}
+    .product__inventory-bar-{{ block.id }}{
+      position: relative;
+      border-bottom: 2px solid #12121233;
+    }
+    .product__inventory-bar-{{ block.id }}::before{
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: {{ product.selected_or_first_available_variant.inventory_quantity }}%;
+      transition: all 0.3s ease;
+    }
+    .product__inventory-bar-{{ block.id }}::before{
+      {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+                    {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
+                      {%- if product.selected_or_first_available_variant.inventory_quantity
+                          <= block.settings.inventory_threshold
+                      -%}
+                        background-color: rgb(238,148,65);
+                        {%- else -%}
+                        background-color: rgb(62,214,96);
+                    {%- endif -%}
+                  {%- endif -%}
+                  {% endif %}
+    }
+    {% endfor %}
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
       padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
@@ -134,7 +162,7 @@
                 <hr>
               {%- when 'inventory' -%}
                 <p
-                  class="product__inventory no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
+                  class="product__inventory product__inventory-bar-{{ block.id }} no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
                   {{ block.shopify_attributes }}
                   id="Inventory-{{ section.id }}"
                   role="status"
@@ -156,20 +184,20 @@
                         {%- else -%}
                           {{- 'products.product.inventory_low_stock' | t -}}
                         {%- endif -%}
-                      {%- else -%}
+                        {%- else -%}
                         <svg width="15" height="15" aria-hidden="true">
                           <circle cx="7.5" cy="7.5" r="7.5" fill="rgb(62,214,96, 0.3)"/>
-                          <circle cx="7.5" cy="7.5" r="5" stroke="rgb(255, 255, 255)" stroke-width="1" fill="rgb(62,214,96)"/>
-                        </svg>
-                        {%- if block.settings.show_inventory_quantity -%}
-                          {{-
-                            'products.product.inventory_in_stock_show_count'
-                            | t: quantity: product.selected_or_first_available_variant.inventory_quantity
-                          -}}
-                        {%- else -%}
-                          {{- 'products.product.inventory_in_stock' | t -}}
-                        {%- endif -%}
-                      {%- endif -%}
+                            <circle cx="7.5" cy="7.5" r="5" stroke="rgb(255, 255, 255)" stroke-width="1" fill="rgb(62,214,96)"/>
+                            </svg>
+                            {%- if block.settings.show_inventory_quantity -%}
+                              {{-
+                                'products.product.inventory_in_stock_show_count'
+                                | t: quantity: product.selected_or_first_available_variant.inventory_quantity
+                                -}}
+                                {%- else -%}
+                                {{- 'products.product.inventory_in_stock' | t -}}
+                              {%- endif -%}
+                            {%- endif -%}
                     {%- else -%}
                       {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
                         <svg width="15" height="15" aria-hidden="true">
@@ -189,6 +217,23 @@
                 </p>
 
               {%- when 'description' -%}
+                {%- unless shop.enabled_payment_types == empty -%}
+                  <span class="visuallyhidden">Supported payment methods</span>
+
+                  <div class="payment-cards-container">
+                    <div class="payment-cards">
+                      <span><strong>Secure checkout with</strong></span>
+
+                      <ul class="payment-cards-options">
+                        {%- for type in shop.enabled_payment_types -%}
+                          <li>
+                            {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  </div>
+                {%- endunless -%}
                 {%- if product.description != blank -%}
                   <div id="customProductDescription" class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
                     {{ product.selected_or_first_available_variant.metafields.custom.variant_one_description }}
@@ -226,7 +271,7 @@
                 </div>
 
               
-              {%- when 'quantity_selector' -%}
+              {%- when 'quantity_selectorss' -%}
              
                 <div
                   id="Quantity-Form-{{ section.id }}"
@@ -467,25 +512,12 @@
                   product: product,
                   product_form_id: product_form_id,
                   section_id: section.id,
-                  show_pickup_availability: true
-                -%}
-                {%- unless shop.enabled_payment_types == empty -%}
-                  <span class="visuallyhidden">Supported payment methods</span>
-
-                  <div class="payment-cards-container">
-                    <div class="payment-cards">
-                      <span><strong>Secure checkout with</strong></span>
-
-                      <ul class="payment-cards-options">
-                        {%- for type in shop.enabled_payment_types -%}
-                          <li>
-                            {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                          </li>
-                        {%- endfor -%}
-                      </ul>
-                    </div>
-                  </div>
-                {%- endunless -%}
+                  show_pickup_availability: true,
+                  quantity_selector: true
+                -%} 
+                <label for="birthday">Birthday</label><br/>
+                <input type="date" id="birthday" name="birthday">
+                <button class="button" id="addToCartTwo" data-variant-id = {{ product.selected_or_first_available_variant.id }} data-section = {{section.id }}>Add to cart 2</button>
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   {% liquid
