@@ -1,19 +1,19 @@
 .discoupon-coupon_content{
   position: relative;
-  height: 200px;
+  height: 100px;
   width: 100%;
   display :flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 30px;
+  border-radius: 20px;
 }
 .discoupon-coupon_content::before, .discoupon-coupon_content::after{
   position: absolute;
   top: 50%;
   content: "";
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background-color: #ffffff;
 }
@@ -36,20 +36,41 @@
     align-items: center;
   }
   .discount-coupon_copy-code-button{
-    height: 40px;
-    width: 140px;
-    font-size: 20px;
-    border: 3px solid #ffffff;
+    height: 25px;
+    width: 70px;
+    font-size: 10px;
+    border: 2px solid #ffffff;
     color: #7757Fb;
     background: #ffffff;
   }
   .discount-coupon_code{
-    height: 40px;
-    width: 140px;
-    font-size: 20px;
+    height: 25px;
+    width: 70px;
+    font-size: 10px;
     text-align: center;
     color: #ffffff;
     background: transparent;
     border: 3px dashed #fff;
     border-right: none;
+  }
+
+  @media (min-width: 750px){
+    .discoupon-coupon_content{
+      height: 150px;
+    }
+    .discoupon-coupon_content::before, .discoupon-coupon_content::after{
+      width: 30px;
+      height: 30px;
+    }
+    .discount-coupon_copy-code-button{
+      height: 30px;
+      width: 100px;
+      font-size: 15px;
+      border: 3px solid #ffffff;
+    }
+    .discount-coupon_code{
+      height: 30px;
+      width: 100px;
+      font-size:15px;
+    }
   }
