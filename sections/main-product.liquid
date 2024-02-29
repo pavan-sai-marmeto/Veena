@@ -34,7 +34,7 @@
       bottom: 0;
       left: 0;
       height: 3px;
-      width: {{ product.selected_or_first_available_variant.inventory_quantity | times: 100 | divided_by : 300  }}%;
+      width: {{ product.selected_or_first_available_variant.inventory_quantity | divided_by : 2 }}%;
       transition: all 0.3s ease;
       {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
           {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}

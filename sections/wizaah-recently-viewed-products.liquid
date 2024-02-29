@@ -26,8 +26,8 @@
             {%- for product in search.results -%}
               {%- if product.id == id -%}        	  
                 <div class="grid__item">
-									{{ product.title }} //Replace it with the product card snippet
-								</div>
+                    {% render 'custom-product-card', product: product, section_id: section.id %}
+				</div>
                 {%- break -%}
               {%- endif -%}
             {%- endfor -%}
