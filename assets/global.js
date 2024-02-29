@@ -1332,6 +1332,9 @@ class VariantSelects extends HTMLElement {
         const customBtn = document.querySelector('#addToCartTwo')
         customBtn.setAttribute('data-variant-id', html.querySelector('#addToCartTwo').dataset.variantId)
         document.querySelector("#customProductDescription").innerHTML = html.querySelector("#customProductDescription").innerHTML;
+        if(document.querySelector("#customDiscountCoupon")){
+          document.querySelector("#customDiscountCoupon").innerHTML = html.querySelector("#customDiscountCoupon").innerHTML;
+        }
         const skuSource = html.getElementById(
           `Sku-${
             this.dataset.originalSection

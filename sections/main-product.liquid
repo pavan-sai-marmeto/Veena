@@ -9,6 +9,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{'custom-coupon-code.css' | asset_url | stylesheet_tag }}
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
     {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
@@ -20,6 +21,9 @@
 
   {%- style -%}
   {% for block in section.blocks %}
+    .discoupon-coupon_content-{{block.id }}{
+      background-image: {{ block.settings.discount_coupon_background }}
+    }
     .product__inventory-bar-{{ block.id }}{
       position: relative;
       border-bottom: 2px solid #12121233;
@@ -269,8 +273,6 @@
                     </div>
                   </details>
                 </div>
-
-              
               {%- when 'quantity_selectorss' -%}
              
                 <div
@@ -506,6 +508,31 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+              {%  when "discount_coupon" %}
+                <div id="customDiscountCoupon">
+                  {% if product.selected_or_first_available_variant.metafields.custom.coupon_code %}
+                    <div class="discoupon-coupon_content-{{block.id }} discoupon-coupon_content">
+                      <div class="h2 discount-coupon_text-heading">
+                        {{ block.settings.discount_coupon_text }}
+                      </div>
+                      <div class="discount-coupon_code-text-and-button">
+                        <input type="text" class="discount-coupon_code" id="couponCode" value={{ product.selected_or_first_available_variant.metafields.custom.coupon_code }}>
+                        <button class="discount-coupon_copy-code-button" id="copyCodeButton" onClick="copyCode()">Copy Code</button>
+                      </div>
+                    </div>
+                    <script>
+                      function copyCode() {
+                        console.log(123)
+                        const customCopyCodeButton = document.querySelector('#copyCodeButton')
+                        const copyText = document.querySelector("#couponCode")
+                        console.log(copyText.textContent)
+                        copyText.select();
+                        navigator.clipboard.writeText(copyText.value);
+                        customCopyCodeButton.textContent = 'Copied'
+                      }
+                    </script>
+                  {% endif %}
+                </div>
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -2373,6 +2400,28 @@
           "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_4.label",
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
         }
+      ]
+    },
+    {
+      "type": "discount_coupon",
+      "name": "Discount coupon",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Discount coupon settings"
+        },
+        {
+          "type": "text",
+          "id": "discount_coupon_text",
+          "label": "Heading",
+          "default": "Variant specific discount"
+        },
+        {
+          "type": "color_background",
+          "id": "discount_coupon_background",
+          "label": "Voucher background",
+          "default": "linear-gradient(#7757Fb, #9450eb)"
+        }   
       ]
     }
   ],

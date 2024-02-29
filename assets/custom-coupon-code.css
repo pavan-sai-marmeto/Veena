@@ -1,0 +1,55 @@
+.discoupon-coupon_content{
+  position: relative;
+  height: 200px;
+  width: 100%;
+  display :flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+}
+.discoupon-coupon_content::before, .discoupon-coupon_content::after{
+  position: absolute;
+  top: 50%;
+  content: "";
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+.discoupon-coupon_content::before{
+  left: 0;
+  transform :translate(-50%, -50%);
+}
+.discoupon-coupon_content::after{
+  right: 0;
+  transform :translate(50%, -50%);
+}
+
+.discount-coupon_text-heading{
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  .discount-coupon_code-text-and-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .discount-coupon_copy-code-button{
+    height: 40px;
+    width: 140px;
+    font-size: 20px;
+    border: 3px solid #ffffff;
+    color: #7757Fb;
+    background: #ffffff;
+  }
+  .discount-coupon_code{
+    height: 40px;
+    width: 140px;
+    font-size: 20px;
+    text-align: center;
+    color: #ffffff;
+    background: transparent;
+    border: 3px dashed #fff;
+    border-right: none;
+  }
