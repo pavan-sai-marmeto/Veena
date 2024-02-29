@@ -29,6 +29,7 @@
 .discount-coupon_text-heading{
     color: #ffffff;
     margin-bottom: 20px;
+    text-align: center;
   }
   .discount-coupon_code-text-and-button{
     display: flex;
@@ -52,11 +53,12 @@
     background: transparent;
     border: 3px dashed #fff;
     border-right: none;
+    outline: none;
   }
 
   @media (min-width: 750px){
     .discoupon-coupon_content{
-      height: 150px;
+      height: 200px;
     }
     .discoupon-coupon_content::before, .discoupon-coupon_content::after{
       width: 30px;

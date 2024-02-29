@@ -3797,3 +3797,8 @@ details-disclosure > details {
   align-items: end;
   gap: 20px;
 }
+
+.product_details_heading {
+  display: flex;
+  align-items: center;
+}

@@ -221,8 +221,11 @@ class QuantityInput extends HTMLElement {
       const buttonPlus = this.querySelector(".quantity__button[name='plus']");
       buttonPlus.classList.toggle("disabled", value >= max);
     }  
-
-    const customBtn = document.querySelector('#addToCartTwo')
+    if(document.querySelector('#customAtcBtn')){
+      const customAtcBtn = document.querySelector('#customAtcBtn')
+      customAtcBtn.setAttribute('data-quantity', value)
+    }
+    const customBtn = document.querySelector('#customAtcBtn')
     customBtn.setAttribute('data-quantity', value);
     const addButtonText = document.querySelector('[name="add"] > span');
     const price = document.getElementById(`price-${this.dataset.section}`);
@@ -1329,8 +1332,8 @@ class VariantSelects extends HTMLElement {
           }`
         );
         
-        const customBtn = document.querySelector('#addToCartTwo')
-        customBtn.setAttribute('data-variant-id', html.querySelector('#addToCartTwo').dataset.variantId)
+        const customAtcBtn = document.querySelector('#customAtcBtn')
+        customAtcBtn.setAttribute('data-variant-id', requestedVariantId)
         document.querySelector("#customProductDescription").innerHTML = html.querySelector("#customProductDescription").innerHTML;
         if(document.querySelector("#customDiscountCoupon")){
           document.querySelector("#customDiscountCoupon").innerHTML = html.querySelector("#customDiscountCoupon").innerHTML;
@@ -1568,34 +1571,50 @@ class CustomSlider extends HTMLElement {
 
 customElements.define("custom-slider", CustomSlider);
 
-//functionality of custom add to cart button with id addTwoCartTwo start
+//functionality of custom add to cart button with id customAtcBtn start
 
-const addToCartButtonEl = document.querySelector('#addToCartTwo');
-  addToCartButtonEl.addEventListener("click", () => {
-
-    console.log(addToCartButtonEl.dataset.quantity)
-    console.log(addToCartButtonEl.dataset.variantId)
-    let formData = {
-      'items': [{
-        'id': addToCartButtonEl.dataset.variantId,
-        'quantity': addToCartButtonEl.dataset.quantity
-        }],
-        "sections": addToCartButtonEl.dataset.section
+if (document.querySelector("#customAtcBtn")) {
+  document
+    .querySelector("#customAtcBtn")
+    .addEventListener("click", (event) => {
+      let customButton = event.target;
+      const variantId = customButton.dataset.variantId;
+      const quantity = customButton.dataset.quantity;
+      const cart =
+        document.querySelector("cart-drawer") ||
+        document.querySelector("cart-notification");
+      console.log(variantId)
+      console.log(quantity)
+      console.log(cart)
+      let formData = {
+        items: [
+          {
+            id: variantId,
+            quantity: quantity,
+            properties: {
+              DOB: `${document.querySelector('#birthday').value}`
+            }
+          },
+        ],
+        sections: cart.getSectionsToRender().map((section) => section.id),
       };
-      
-      fetch(window.Shopify.routes.root + 'cart/add.js', {
-        method: 'POST',
+      fetch("/cart/add.js", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       })
-      .then(response => {
-        return response.json();
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      }); 
-})
+        .then((response) => {
+          return response.json();
+        })
+        .then((jsonData) => {
+          cart.renderContents(jsonData);
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    });
+}
 
-//custom add to cart button with id addTwoCartTwo end
+//custom add to cart button with id customAtcBtn end

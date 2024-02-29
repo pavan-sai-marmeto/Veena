@@ -3,13 +3,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
@@ -25,6 +18,21 @@
           "settings": {
             "picker_type": "button",
             "swatch_shape": "circle"
+          }
+        },
+        "inventory_WmLqpb": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
+          }
+        },
+        "discount_coupon_fm6cdL": {
+          "type": "discount_coupon",
+          "settings": {
+            "discount_coupon_text": "Variant specific discount",
+            "discount_coupon_background": "linear-gradient(180deg, rgba(119, 87, 251, 1), rgba(148, 80, 235, 1) 100%)"
           }
         },
         "quantity_selector": {
@@ -70,10 +78,11 @@
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "price",
         "variant_picker",
+        "inventory_WmLqpb",
+        "discount_coupon_fm6cdL",
         "quantity_selector",
         "buy_buttons",
         "icon_with_text_dpikXd",
