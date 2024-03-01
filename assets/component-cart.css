@@ -224,3 +224,13 @@ cart-items {
     gap: 1rem;
   }
 }
+
+/* Custom cart background */
+.custom-cart-background{
+  background-color: #f5f5f5;
+}
+
+.breadcrumb_main{
+  width: 100%;
+  padding: 15px 0;
+}
