@@ -59,3 +59,31 @@
     padding-bottom: 82.5rem;
   }
 }
+
+
+/* Article tabs css start */
+.main-blog__article-tabs{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  gap :20px;
+}
+
+.main-blog__article-tab {
+  display: inline-block;
+  height: 30px;
+  width: 140px;
+  border:1px solid;
+  border-radius: 10px;
+  text-decoration: none;
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
+.main-blog__article-tab.active {
+  
+}
+
+/* Article tabs css end */

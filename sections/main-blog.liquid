@@ -21,7 +21,32 @@
     <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {{ blog.title | escape }}
     </h1>
-
+    {% comment %} <ul class="main-blog__article-tabs">
+      <li>
+        <a class="custom-button-secondary_color" href="{{ blog.url }}"> All Posts </a>
+      </li>
+      {% for tag in blog.tags %}
+        {% if tag contains 'category_' %}
+          {% assign tag_name = tag | split: '_' | last %}
+          <li>
+            <a class="custom-button-secondary_color" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag_name }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul> {% endcomment %}
+    <ul class="main-blog__article-tabs">
+      <li>
+        <a class="main-blog__article-tab" href="{{ blog.url }}"> All Posts </a>
+      </li>
+      {% for tag in blog.all_tags %}
+        {% if tag contains 'category_' %}
+          {% assign tag_name = tag | split: '_' | last %}
+          <li>
+            <a class="main-blog__article-tab" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag_name }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
     <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
       {%- for article in blog.articles -%}
         <div

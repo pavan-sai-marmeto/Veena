@@ -3808,7 +3808,7 @@ details-disclosure > details {
 .shipping-bar {
   width: 100%;
   border-radius: 2rem;
-  background: #F2F0FF;
+  background: #d03c3f;
   padding: 0.75rem 2rem;
   margin: 1.5rem 0 0.5rem;
 }
@@ -3826,7 +3826,7 @@ details-disclosure > details {
   height: 100%;
   border-radius: 1rem;
   transition: all .75s ease-in-out;
-  background-color: #AFAFED;
+  background-color: #00D964;
 }
 .shipping-bar .shipping__icon {
   position: absolute;

@@ -516,5 +516,12 @@
   fill: rgb(0, 0, 0);
 }
 
-
+/* Custom View cart with checkout button container css start */
+.cart__view-cart-and-checkout-buttons{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  column-gap: 15px;
+}
+/* Custom View cart with checkout button container css end */
 
