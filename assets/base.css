@@ -413,6 +413,7 @@ blockquote {
   font-size: 1.3rem;
   line-height: calc(1 + 0.5 / var(--font-body-scale));
   letter-spacing: 0.04rem;
+  background: none;
 }
 
 .color-foreground {
@@ -1597,7 +1598,7 @@ details[open] > .share-button__fallback {
 .customer select {
   -webkit-appearance: none;
   appearance: none;
-  background-color: rgb(var(--color-background));
+  /* background-color: rgb(var(--color-background)); */
   color: rgb(var(--color-foreground));
   font-family: var(--font-body-family);
   font-style: var(--font-body-style);
@@ -1612,6 +1613,7 @@ details[open] > .share-button__fallback {
   min-width: calc(7rem + (var(--inputs-border-width) * 2));
   position: relative;
   border: 0;
+  background: none;
 }
 
 .field:before,
@@ -3807,11 +3809,24 @@ details-disclosure > details {
 /* shipping bar snippet css start*/
 .shipping-bar {
   width: 100%;
-  border-radius: 2rem;
+  border-top-left-radius: 1.6rem;
   background: #d03c3f;
   padding: 0.75rem 2rem;
-  margin: 1.5rem 0 0.5rem;
+  margin: 0 0 0.5rem;
 }
+.shipping-bar--heading, .shipping-cart_description{
+  color: #ffffff;
+  margin-bottom: 10px;
+  font-size: 22px;
+  padding: 0;
+}
+.shipping-bar--heading{
+  padding-left: 0;
+}
+.shipping-cart_description{
+  font-size: 16px;
+}
+
 .cart-drawer__black {
   color: #111314;
 }
@@ -3824,7 +3839,7 @@ details-disclosure > details {
 }
 .shipping-bar .shipping-bar__filled {
   height: 100%;
-  border-radius: 1rem;
+  border-radius: 1rem 0 0 0;
   transition: all .75s ease-in-out;
   background-color: #00D964;
 }

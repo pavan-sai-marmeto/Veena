@@ -36,13 +36,13 @@
     </ul> {% endcomment %}
     <ul class="main-blog__article-tabs">
       <li>
-        <a class="main-blog__article-tab" href="{{ blog.url }}"> All Posts </a>
+        <a class="main-blog__article-tab {% if current_tags == blank %}active{% endif %}" href="{{ blog.url }}"> All Posts </a>
       </li>
       {% for tag in blog.all_tags %}
         {% if tag contains 'category_' %}
           {% assign tag_name = tag | split: '_' | last %}
           <li>
-            <a class="main-blog__article-tab" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag_name }}</a>
+            <a class="main-blog__article-tab {% if current_tags contains tag %}active{% endif %}" href="{{ blog.url }}/tagged/{{ tag | handleize }}">{{ tag_name }}</a>
           </li>
         {% endif %}
       {% endfor %}

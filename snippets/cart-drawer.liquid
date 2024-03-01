@@ -76,6 +76,7 @@
           class=" is-empty"
         {% endif %}
       >
+        {% render 'cart-drawer-timer' %}
         <form
           action="{{ routes.cart_url }}"
           id="CartDrawer-Form"
@@ -91,7 +92,7 @@
                       <th id="CartDrawer-ColumnProductImage" role="columnheader">
                         <span class="visually-hidden">{{ 'sections.cart.headings.image' | t }}</span>
                       </th>
-                      <th
+                      {% comment %} <th
                         id="CartDrawer-ColumnProduct"
                         class="caption-with-letter-spacing"
                         scope="col"
@@ -106,7 +107,7 @@
                         role="columnheader"
                       >
                         {{ 'sections.cart.headings.total' | t }}
-                      </th>
+                      </th> {% endcomment %}
                       <th id="CartDrawer-ColumnQuantity" role="columnheader">
                         <span class="visually-hidden">{{ 'sections.cart.headings.quantity' | t }}</span>
                       </th>
@@ -325,7 +326,8 @@
                               >
                                 <button
                                   type="button"
-                                  class="button button--tertiary cart-remove-button"
+                                  {% comment %} class="button button--tertiary cart-remove-button" {% endcomment %}
+                                  class="custom-button-secondary_color"
                                   aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
                                   data-variant-id="{{ item.variant.id }}"
                                 >

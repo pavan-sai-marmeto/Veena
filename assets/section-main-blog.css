@@ -82,8 +82,9 @@
   text-align: center;
 }
 
-.main-blog__article-tab.active {
-  
+.main-blog__article-tab.active, .main-blog__article-tab.active {
+  color: #ffffff;
+  background-color: #000000;
 }
 
 /* Article tabs css end */

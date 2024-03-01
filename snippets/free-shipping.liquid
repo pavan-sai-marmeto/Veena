@@ -12,7 +12,7 @@ Uses : {%  render 'free-shipping'  %}
         assign perc_change = 100 | minus: perc_change
       endif
     %}
-    <h2 class="h3">Shipping cart({{ cart.item_count }})</h2>
+    <h2 class="h3 shipping-bar shipping-bar--heading">Shopping cart({{ cart.item_count }})</h2>
     {% if perc_change == 100 %}
       <div class="shipping-bar__message cart-drawer__black h6 d-flex">
         <div>
@@ -28,14 +28,14 @@ Uses : {%  render 'free-shipping'  %}
               <path d="M18.5104 1.48958C19.1594 2.13858 18.8447 3.28454 18.025 3.69745C17.109 4.1589 16.2234 4.79531 15.3705 5.62034C15.0927 5.88912 14.6483 5.89835 14.375 5.625V5.625C14.1017 5.35165 14.1109 4.90731 14.3797 4.62947C15.2047 3.77663 15.8411 2.89101 16.3025 1.97498C16.7155 1.15529 17.8614 0.84059 18.5104 1.48958V1.48958Z" fill="#E53A35"></path>
               </svg>
             </div>
-            <p class="">Congratulations ! You qualify for <strong class="free-shipping-highlight">FREE SHIPPING !</strong></p>
+            <p class="shipping-cart_description">Congratulations ! You qualify for <strong class="free-shipping-highlight">FREE SHIPPING !</strong></p>
       </div>
     {% endif %}
     {% if perc_change == 100 %}
       {% comment %} <div class="shipping-bar__title font-bold text-md cart-drawer__black">Free shipping</div> {% endcomment %}
     {% else %}
       <div class="shipping-bar__message cart-drawer__black h6">
-        <p>
+        <p class="shipping-cart_description">
           You are <strong>{{ change | times: 100 | money }}</strong> away from <strong>free shipping*</strong>
         </p>
       </div>
