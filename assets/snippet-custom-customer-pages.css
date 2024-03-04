@@ -1,0 +1,39 @@
+.account-page-tabs {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    width: 30%;
+}
+.account-page-tabs a {
+    text-decoration: none;
+    color: black;
+    background-color: transparent;
+}
+.account-page-account-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 52px;
+    border-radius: 4px;
+    background: var(--primary-colors-p-2, #e3dbd3);
+    padding: 0 30px;
+    cursor: pointer;
+}
+.account-page-account-btn.active {
+    background: var(--Secondary-Colors-S1, #895E59);
+    color: white;
+    border-left: 8px solid #BC9891;
+    padding: 0px 20px;
+}
+.tabs-hover:hover {
+    border-left: 8px solid #BC9891;
+    color: white;
+    background: #895E59;
+    padding: 0px 20px;
+}
+.tabs-hover:hover path{
+    fill: #ffffff;
+}

@@ -1,4 +1,4 @@
-{% comment %} <style type="text/css">
+<style type="text/css">
   .template-404 .title + * {
     margin-top: 1rem;
   }
@@ -20,7 +20,9 @@
   <a href="{{ routes.all_products_collection_url }}" class="button">
     {{ 'general.continue_shopping' | t }}
   </a>
-</div> {% endcomment %}
+</div>
+
+{% comment %} 
 {%  layout 'none' %}
 <style>
   body {
@@ -203,4 +205,4 @@ img.errorPage__tembleweed {
   </div>
   <span class="errorPage__templeweed-container"><img src="https://i.ibb.co/mTg87G2/tembleweed.png" width="2000px" height="1000px" class="errorPage__tembleweed"></span>
   <div class="errorPage__terrain"></div>
-</section>
+</section> {% endcomment %}

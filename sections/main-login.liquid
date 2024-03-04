@@ -132,7 +132,7 @@
               </label>
             </div>
     
-            <a href="#recover">
+            <a href="#recover" class="custom-forgot-password">
               {{ 'customer.login_page.forgot_password' | t }}
             </a>
           {%- endif -%}
@@ -142,7 +142,7 @@
               {{ 'customer.login_page.sign_in' | t }}
             </button>
     
-          <a href="{{ routes.account_register_url }}">
+          <a href="{{ routes.account_register_url }}" class="custom-button-secondary_color text-color">
             {{ 'customer.login_page.create_account' | t }}
           </a>
         {%- endform -%}

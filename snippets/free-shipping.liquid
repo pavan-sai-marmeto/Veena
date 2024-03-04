@@ -41,8 +41,8 @@ Uses : {%  render 'free-shipping'  %}
       </div>
     {% endif %}
     <div class="shipping-bar__container">
-      <div class="shipping-bar__filled" style="width: {{ perc_change | string | append: '%' }}">
-        <div class="shipping__icon" style="left: {{ perc_change | string | append: '%' }}">
+      <div class="shipping-bar__filled" style="width: {{ perc_change  | append: '%' }}">
+        <div class="shipping__icon" style="left: {{ perc_change  | append: '%' }}">
           {% comment %} <svg xmlns="http://www.w3.org/2000/svg" width="31.678" height="35.847" viewBox="0 0 31.678 35.847">
             <g id="Group_200290" data-name="Group 200290" transform="translate(-3.291 15.779) rotate(-45)">
             <path id="Path_301827" data-name="Path 301827" d="M.344,6.568A14.727,14.727,0,0,0,.173,2.1C.1,1.441-.237.615.3.226,2.236-1.181,2.36,4.375,3.017,5.8,4.124,4.508,5.131,2.977,6.74,2.337A2.954,2.954,0,0,1,7.9,2.045c4.156.113-3.324,3.435-2.831,4.911a12.869,12.869,0,0,1,4.963-.6,2.408,2.408,0,0,1,1.135.372c2.063,1.343-4.55,1.982-5.887,3.349" transform="translate(10.75 0)" fill="#318200"></path>
