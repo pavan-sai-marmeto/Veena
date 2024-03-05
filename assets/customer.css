@@ -809,18 +809,25 @@ a.custom-button-secondary_color.text-color {
 a.custom-forgot-password {
   text-decoration: none;
 }
-.customer__acount-tabs-and-details-section {
-  display: flex;
+
+.customer__account-tabs-section {
+  margin: 0 auto;
+  padding: 0 0 auto;
 }
+.customer__account-tabs-and-details-section {
+  display: flex;
+  padding: 0;
+}
+
 .customer__account-icon-and-title {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   gap: 20px;
 }
 .customer__account-details {
-  padding: 22px 28px 33px;
   width: 100%;
+  padding: 22px 28px 33px;
 }
 .customer-name {
   padding: 18px 0px 14px 10px;
@@ -836,5 +843,12 @@ a.custom-forgot-password {
 .customer__email p {
   padding: 0 0 9px;
   margin: 0;
+}
+.customer-adresses__page {
+  display: flex;
+}
+.customer__add-address-button {
+  background-color: #895e59 !important;
+  gap: 10px;
 }
 /* Custom css end*/

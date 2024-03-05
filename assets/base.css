@@ -3599,10 +3599,10 @@ details-disclosure > details {
 
 /*  Button Styles */
 
-.custom-button-primary, 
-.custom-button-secondary, 
-.custom-button-secondary_color, 
-.custom-button-primary-transparent{
+.custom-button-primary,
+.custom-button-secondary,
+.custom-button-secondary_color,
+.custom-button-primary-transparent {
   display: inline-block;
   padding: 8px 20px;
   border-radius: 10rem;
@@ -3616,16 +3616,13 @@ details-disclosure > details {
 }
 
 @media screen and (min-width: 750px) {
-  
-.custom-button-primary, 
-.custom-button-secondary, 
-.custom-button-secondary_color, 
-.custom-button-primary-transparent{
-  font-size: 16px;
+  .custom-button-primary,
+  .custom-button-secondary,
+  .custom-button-secondary_color,
+  .custom-button-primary-transparent {
+    font-size: 16px;
+  }
 }
-  
-}
-
 
 .custom-button-primary:before,
 .custom-button-secondary:before,
@@ -3643,7 +3640,6 @@ details-disclosure > details {
   z-index: -1;
 }
 
-
 .custom-button-primary:after,
 .custom-button-secondary:after,
 .custom-button-secondary_color:after,
@@ -3659,7 +3655,6 @@ details-disclosure > details {
   z-index: -2;
 }
 
-
 .custom-button-primary {
   color: #000;
 }
@@ -3669,7 +3664,6 @@ details-disclosure > details {
 .custom-button-primary-transparent {
   color: #fff;
 }
-
 
 .custom-button-primary:hover,
 .custom-button-primary-transparent:hover {
@@ -3682,7 +3676,6 @@ details-disclosure > details {
   width: 100%;
 }
 
-
 .custom-button-secondary:after {
   background-color: #d03c3f;
 }
@@ -3692,7 +3685,6 @@ details-disclosure > details {
 .custom-button-secondary:hover {
   color: #fff;
 }
-
 
 .custom-button-secondary_color:after {
   background-color: #000;
@@ -3706,7 +3698,6 @@ details-disclosure > details {
   color: #fff;
 }
 
-
 .custom-button-primary-transparent:after {
   background: none;
 }
@@ -3717,7 +3708,6 @@ details-disclosure > details {
 .custom-button-primary-transparent:before {
   background-color: #f5f5f5;
 }
-
 
 */
 /*  Button Styles End */
@@ -3794,7 +3784,7 @@ details-disclosure > details {
 }
 
 /* Scroll Line Animation End */
-.product_form__quantity-and-add-to-cart{
+.product_form__quantity-and-add-to-cart {
   display: flex;
   align-items: end;
   gap: 20px;
@@ -3805,7 +3795,6 @@ details-disclosure > details {
   align-items: center;
 }
 
-
 /* shipping bar snippet css start*/
 .shipping-bar {
   width: 100%;
@@ -3814,16 +3803,17 @@ details-disclosure > details {
   padding: 0.75rem 2rem;
   margin: 0 0 0.5rem;
 }
-.shipping-bar--heading, .shipping-cart_description{
+.shipping-bar--heading,
+.shipping-cart_description {
   color: #ffffff;
   margin-bottom: 10px;
   font-size: 22px;
   padding: 0;
 }
-.shipping-bar--heading{
+.shipping-bar--heading {
   padding-left: 0;
 }
-.shipping-cart_description{
+.shipping-cart_description {
   font-size: 16px;
 }
 
@@ -3840,13 +3830,53 @@ details-disclosure > details {
 .shipping-bar .shipping-bar__filled {
   height: 100%;
   border-radius: 1rem 0 0 0;
-  transition: all .75s ease-in-out;
-  background-color: #00D964;
+  transition: all 0.75s ease-in-out;
+  background-color: #00d964;
 }
 .shipping-bar .shipping__icon {
   position: absolute;
-  transition: all .75s ease-in-out;
-  transform: translate(-70%,-45%) rotate(30deg);
+  transition: all 0.75s ease-in-out;
+  transform: translate(-70%, -45%) rotate(30deg);
 }
 
 /* shipping bar snippet css end */
+
+/* Customer pages css  start*/
+.account-page-tabs {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.account-page-tabs a {
+  text-decoration: none;
+  color: black;
+  background-color: transparent;
+}
+.account-page-account-btn {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  gap: 20px;
+  border-radius: 4px;
+  background: var(--primary-colors-p-2, #e3dbd3);
+  padding: 0 30px;
+  cursor: pointer;
+  min-width: 320px;
+}
+.account-page-account-btn.active {
+  background: var(--Secondary-Colors-S1, #895e59);
+  color: white;
+  border-left: 8px solid #bc9891;
+  padding: 0px 20px;
+}
+.tabs-hover:hover {
+  border-left: 8px solid #bc9891;
+  color: white;
+  background: #895e59;
+  padding: 0px 20px;
+}
+.tabs-hover:hover path {
+  fill: #ffffff;
+}
+/* Customer pages css  end*/

@@ -1,0 +1,25 @@
+.customer_tabs-and-orders-page {
+  display: flex;
+  gap: 20px;
+}
+.customer-orders__page {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+.customer-orders__mail a {
+  text-decoration: none;
+  color: #000000;
+}
+.customer-orders__orders {
+  list-style-type: none;
+  padding-left: 0;
+}
+.main-orders-table-header {
+  color: #000000;
+  background-color: #e3dbd3;
+}
+.customer-orders-data {
+  width: 70%;
+  margin: 0 auto;
+}

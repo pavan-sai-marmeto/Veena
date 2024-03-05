@@ -1,16 +1,14 @@
-{{ 'snippet-custom-customer-pages.css' | asset_url | stylesheet_tag }}
-
-<div class="account-page-tabs  account">
+<div class="account-page-tabs  ">
   <a href="/account">
-    <div class="account-page-account-btn account  active  tabs-hover">
+    <div class="account-page-account-btn account active tabs-hover">
       <span class="account-btn-logo">
         {% render 'icon-customer', icon_name: 'account' %}
       </span>
-      <div class="account-btn-logo-name">Account Details</div>
+      <div class="account-btn-logo-name">Account Details {{ url }}</div>
     </div>
   </a>
   <a href="/pages/orders">
-    <div class="account-page-account-btn order  tabs-hover">
+    <div class="account-page-account-btn  orders tabs-hover">
       <span class="account-btn-logo">
         {% render 'icon-customer', icon_name: 'orders' %}
       </span>
@@ -23,22 +21,6 @@
         {% render 'icon-customer', icon_name: 'address' %}
       </span>
       <div class="account-btn-logo-name">View Address</div>
-    </div>
-  </a>
-  <a href="/pages/swym-wishlist?">
-    <div class="account-page-account-btn tabs-hover">
-      <span class="account-btn-logo">
-        {% render 'icon-customer', icon_name: 'wishlist' %}
-      </span>
-      <div class="account-btn-logo-name">Wishlist</div>
-    </div>
-  </a>
-  <a href="/pages/faq">
-    <div class="account-page-account-btn  tabs-hover">
-      <span class="account-btn-logo">
-        {% render 'icon-customer', icon_name: 'need help' %}
-      </span>
-      <div class="account-btn-logo-name">Need Help?</div>
     </div>
   </a>
 

@@ -28,11 +28,10 @@
 
     {% render 'meta-tags' %}
 
-    
     {{ 'snippet-custom-product-card.css' | asset_url | stylesheet_tag }}
     {{ 'splide.min.css' | asset_url | stylesheet_tag }}
     <script src="{{ "splide.min.js" | asset_url }}" defer></script>
-    
+
     <script src="{{ 'snippet-product-card.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
@@ -298,8 +297,9 @@
     {%- endif -%}
 
     {% sections 'header-group' %}
-    
+
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+      {% render 'breadcrumbs' %}
       {{ content_for_layout }}
     </main>
 
