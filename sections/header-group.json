@@ -30,8 +30,8 @@
       "type": "header",
       "settings": {
         "logo_position": "middle-center",
-        "menu": "collection-menu",
-        "menu_type_desktop": "dropdown",
+        "menu": "levis-header-menu",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "on-scroll-up",
         "show_line_separator": false,
         "color_scheme": "scheme-1",

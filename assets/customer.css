@@ -851,4 +851,14 @@ a.custom-forgot-password {
   background-color: #895e59 !important;
   gap: 10px;
 }
+.customer__addresses-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+.customer__addresses-container li {
+  border: 1px solid #d0bbba;
+  padding: 10px;
+}
 /* Custom css end*/

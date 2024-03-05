@@ -1,0 +1,7 @@
+.custom-nav-links-container {
+  display: flex;
+  justify-content: space-between;
+}
+.custom-nav-links-container ul {
+  margin: 0;
+}

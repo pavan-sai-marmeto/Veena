@@ -3865,7 +3865,7 @@ details-disclosure > details {
   min-width: 320px;
 }
 .account-page-account-btn.active {
-  background: var(--Secondary-Colors-S1, #895e59);
+  background: #895e59;
   color: white;
   border-left: 8px solid #bc9891;
   padding: 0px 20px;

@@ -1,14 +1,16 @@
+{% assign current_url = request.path | split: '/' | last %}
+
 <div class="account-page-tabs  ">
   <a href="/account">
-    <div class="account-page-account-btn account active tabs-hover">
+    <div class="account-page-account-btn  {% if current_url == 'account' %}active{% endif %} tabs-hover">
       <span class="account-btn-logo">
         {% render 'icon-customer', icon_name: 'account' %}
       </span>
-      <div class="account-btn-logo-name">Account Details {{ url }}</div>
+      <div class="account-btn-logo-name">Account Details</div>
     </div>
   </a>
   <a href="/pages/orders">
-    <div class="account-page-account-btn  orders tabs-hover">
+    <div class="account-page-account-btn  orders {% if current_url == 'orders' %}active{% endif %} tabs-hover">
       <span class="account-btn-logo">
         {% render 'icon-customer', icon_name: 'orders' %}
       </span>
@@ -16,7 +18,7 @@
     </div>
   </a>
   <a href="/account/addresses">
-    <div class="account-page-account-btn addresses  tabs-hover">
+    <div class="account-page-account-btn addresses {% if current_url == 'addresses' %}active{% endif %} tabs-hover">
       <span class="account-btn-logo">
         {% render 'icon-customer', icon_name: 'address' %}
       </span>
