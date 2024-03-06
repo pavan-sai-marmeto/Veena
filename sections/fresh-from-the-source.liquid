@@ -1,0 +1,198 @@
+{{ 'snippet-fresh-source.css' | asset_url | stylesheet_tag }}
+<script src="{{ "fresh-source.js" | asset_url  }}" defer></script>
+
+{% style %}
+  .padding-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+  }
+
+  @media only screen and (min-width: 750px) {
+    .padding-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+   }
+{% endstyle %}
+
+{% capture slider-options %}
+{
+    "autoplay" : {{ section.settings.slider_autoplay }},
+    "interval" : {{ section.settings.slider_autoplay_duration | times:1000 }},
+    "type" : "{{ section.settings.slide_animation }}",
+    "pagination" : {{ section.settings.slide_dots }},
+    "arrows" : {{ section.settings.slide_arrows }},
+    "rewind" : {{ section.settings.infinite_scroll }},
+    "drag": {{ section.settings.slide_drag }},
+    "perPage": 4,
+    "gap": 20
+}
+{% endcapture %}
+
+<div class="fresh-source padding-{{ section.id }}">
+  <div class="page-width">
+    <div class="h1 fresh-source__heading">
+      {% if section.settings.section_heading %}
+        {{ section.settings.section_heading }}
+      {% endif %}
+    </div>
+    <div class="fresh-source__collection-tabs-container">
+      <ul class="fresh-source__collection-tabs">
+        {% for block in section.blocks %}
+          <li
+            class="fresh-source__collection {% if forloop.first %}active{% endif %}"
+            data-tab="{{ block.id }}"
+          >
+            {{ block.settings.collection_title }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div>
+        {% for block in section.blocks %}
+      <custom-slider data-index="{{ block.id }}" class="fresh-source__collection-content {% if forloop.index == 1 %}active-collection{% endif %}">
+        <section
+          class="splide custom-border-radius"
+          aria-label="Slide Show"
+          data-slider-options='{{ slider-options }}'
+        >
+          <div class="splide__track">
+            <ul class="splide__list">
+                {% for product in block.settings.products_collection.products %}
+                  <li class="splide__slide">
+                    {% render 'custom-product-card', product: product %}
+                  </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+</custom-slider>
+{% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "fresh-source",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Section heading",
+      "id": "section_heading",
+      "default": "Fresh From The Source"
+    },
+    {
+      "type": "header",
+      "content": "Slider settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_autoplay",
+      "label": "Slide autoplay",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "slide_dots",
+      "label": "Show slide dots",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "slide_arrows",
+      "label": "Show slide arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "infinite_scroll",
+      "label": "Infinite scroll",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "slide_drag",
+      "label": "Enable drag",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "slide_animation",
+      "label": "Slide animation",
+      "options": [
+        {
+          "value": "loop",
+          "label": "Loop"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        },
+        {
+          "value": "slide",
+          "label": "Slide"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "slider_autoplay_duration",
+      "label": "Slider autoplay duration",
+      "min": 1,
+      "step": 1,
+      "max": 10,
+      "default": 3,
+      "unit": "sec"
+    },
+    {
+      "type": "header",
+      "content": "Adjust Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_tab",
+      "name": "collection tab",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Collection title",
+          "id": "collection_title"
+        },
+        {
+          "type": "collection",
+          "label": "Choose products collection",
+          "id": "products_collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "fresh-source"
+    }
+  ]
+}
+{% endschema %}
