@@ -1,0 +1,134 @@
+<style>
+  .custom-section-header .page-width {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .custom-navigation-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+  }
+  .custom-navigation-links a {
+    color: #000000;
+    text-decoration: none;
+  }
+  .custom-navigation-logo {
+    text-align: center;
+  }
+  .custom-navigation-icons svg {
+    width: 50px;
+  }
+  .custom-navigation-icons {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+  }
+</style>
+
+<header class="custom-section-header">
+  <div class="page-width">
+    <nav>
+      <ul class="custom-navigation-links">
+        {% for link in section.settings.link_item.links %}
+          <li>
+            {% if link.links != blank %}
+              <header-menu>
+                <details>
+                  <summary>
+                    <a href="{{ link.title }}">
+                      {{ link.title }}
+                    </a>
+                  </summary>
+                  {% render 'icon-caret' %}
+                  <div>
+                    <ul>
+                      {% for childlink in link.links %}
+                        <li>
+                          <a href="{{ childlink.title }}">{{ childlink.title }}</a>
+                          {{ childlink.links }}
+                          <ul>
+                            {% for grandchildlink in childlink.links %}
+                              <li>
+                                <a href="{{ grandchildlink.title }}">{{ grandchildlink.title }}</a>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                </details>
+              </header-menu>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+    {% comment %} Logo {% endcomment %}
+    <div class="custom-navigation-logo">
+      {% if section.settings.image_desktop != blank %}
+        {% render 'responsive-image', desktopImage: section.settings.image_desktop %}
+      {% endif %}
+    </div>
+    {% comment %} Links {% endcomment %}
+    <div class="custom-navigation-icons">
+      {% render 'icon-account' -%}
+      {%- render 'icon-cart' %}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "section",
+  "class": "custom-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "label": "Image Desktop",
+      "id": "image_desktop"
+    },
+    {
+      "type": "link_list",
+      "label": "Link item",
+      "id": "link_item"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "Mega menu",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Image desktop",
+          "id": "image_desktop"
+        },
+        {
+          "type": "image_picker",
+          "label": "Image mobile",
+          "id": "image_mobile"
+        },
+        {
+          "type": "text",
+          "label": "Mega menu title",
+          "id": "mega_menu_title",
+          "info": "Mega menu will be applied to this link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "My New Section"
+    }
+  ]
+}
+{% endschema %}

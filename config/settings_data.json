@@ -132,6 +132,13 @@
         "settings": {
           "color_scheme": "scheme-1"
         }
+      },
+      "custom-header": {
+        "type": "custom-header",
+        "settings": {
+          "image_desktop": "shopify:\/\/shop_images\/n_Veena.webp",
+          "link_item": "levis-header-menu"
+        }
       }
     },
     "content_for_index": [
