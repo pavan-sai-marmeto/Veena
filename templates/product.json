@@ -68,6 +68,13 @@
           "settings": {
             "share_label": "Share"
           }
+        },
+        "discount_coupon_WKqgWg": {
+          "type": "discount_coupon",
+          "settings": {
+            "discount_coupon_text": "Variant specific discount",
+            "discount_coupon_background": "linear-gradient(180deg, rgba(119, 87, 251, 1), rgba(148, 80, 235, 1) 100%)"
+          }
         }
       },
       "block_order": [
@@ -79,7 +86,8 @@
         "buy_buttons",
         "icon_with_text_dpikXd",
         "description",
-        "share"
+        "share",
+        "discount_coupon_WKqgWg"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -95,6 +103,64 @@
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 12
+      }
+    },
+    "custom_text_grid_9BaqV6": {
+      "type": "custom-text-grid",
+      "blocks": {
+        "grid_items_X8YnfV": {
+          "type": "grid-items",
+          "repeater": "{{ product.metafields.custom.custom_text_grid.value }}",
+          "settings": {
+            "heading_text": "{{ block.repeater.heading.value }}",
+            "heading_text_color": "#fff",
+            "description": "<p>{{ block.repeater.description | metafield_tag }}<\/p>",
+            "button_label": "{{ block.repeater.button_text.value }}",
+            "button_link": "",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center"
+          }
+        }
+      },
+      "block_order": [
+        "grid_items_X8YnfV"
+      ],
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "custom_media_grid_PQ93Hp": {
+      "type": "custom-media-grid",
+      "blocks": {
+        "media_fDUG4X": {
+          "type": "media",
+          "repeater": "{{ product.metafields.custom.custom_images_with_test_grid.value }}",
+          "settings": {
+            "image": "{{ block.repeater.image.value }}",
+            "subheading": "{{ block.repeater.heading.value }}",
+            "subheading_color": "#000000",
+            "heading": "{{ block.repeater.pre_heading.value }}",
+            "heading_text_color": "#000000",
+            "description": "<p>{{ block.repeater.description | metafield_tag }}<\/p>",
+            "description_text_color": "#000000",
+            "button_label": "{{ block.repeater.button_label.value }}",
+            "button_link": "",
+            "column_span": "1",
+            "row_span": "1",
+            "column_span_mobile": "1",
+            "text_alignment": "left",
+            "text_alignment_mobile": "center",
+            "alignment_position": "align-center justify-center"
+          }
+        }
+      },
+      "block_order": [
+        "media_fDUG4X"
+      ],
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "related-products": {
@@ -124,6 +190,8 @@
   },
   "order": [
     "main",
+    "custom_text_grid_9BaqV6",
+    "custom_media_grid_PQ93Hp",
     "related-products",
     "wizaah_recently_viewed_products_e3V3f4"
   ]

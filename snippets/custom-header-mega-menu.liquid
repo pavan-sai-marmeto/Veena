@@ -108,3 +108,26 @@
     {%- endfor -%}
   </ul>
 </nav>
+
+<script>
+  let navLink = document.querySelectorAll('.mega-menu');
+
+  navLink.forEach((each) => {
+    each.addEventListener('mouseover', () => {
+      navLink.forEach((eachEl) => {
+        eachEl.removeAttribute('open');
+      });
+      each.setAttribute('open', 'true');
+    });
+  });
+
+  let megaMenuContent = document.querySelectorAll('.mega-menu__content');
+
+  megaMenuContent.forEach((each) => {
+    each.addEventListener('mouseout', () => {
+      navLink.forEach((eachEl) => {
+        eachEl.removeAttribute('open');
+      });
+    });
+  });
+</script>

@@ -5,3 +5,6 @@
 .custom-nav-links-container ul {
   margin: 0;
 }
+.header__menu-item svg {
+  display: none;
+}
