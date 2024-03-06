@@ -9,7 +9,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
-  {{'custom-coupon-code.css' | asset_url | stylesheet_tag }}
+  {{ 'custom-coupon-code.css' | asset_url | stylesheet_tag }}
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
     {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
@@ -20,50 +20,51 @@
   {%- endif -%}
 
   {%- style -%}
-  {% for block in section.blocks %}
-    .discoupon-coupon_content-{{block.id }}{
-      background-image: {{ block.settings.discount_coupon_background }}
-    }
-    .product__inventory-bar-{{ block.id }}{
-      position: relative;
-      border-bottom: 2px solid #12121233;
-    }
-    .product__inventory-bar-{{ block.id }}::before{
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 3px;
-      width: {{ product.selected_or_first_available_variant.inventory_quantity | divided_by : 2 }}%;
-      transition: all 0.3s ease;
-      {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
-          {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
-              {%- if product.selected_or_first_available_variant.inventory_quantity
-                          <= block.settings.inventory_threshold
-                  -%}
-                  background-color: rgb(238,148,65);
-              {%- else -%}
-                  background-color: rgb(62,214,96);
-              {%- endif -%}
-          {%- endif -%}
-       {% endif %}
+    {% for block in section.blocks %}
+      .discoupon-coupon_content-{{block.id }}{
+        background-image: {{ block.settings.discount_coupon_background }}
       }
-    {% endfor %}
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-    }
-
-    @media screen and (min-width: 750px) {
+      .product__inventory-bar-{{ block.id }}{
+        position: relative;
+        border-bottom: 2px solid #12121233;
+      }
+      .product__inventory-bar-{{ block.id }}::before{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        width: {{ product.selected_or_first_available_variant.inventory_quantity | divided_by : 2 }}%;
+        transition: all 0.3s ease;
+        {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+            {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
+                {%- if product.selected_or_first_available_variant.inventory_quantity
+                            <= block.settings.inventory_threshold
+                    -%}
+                    background-color: rgb(238,148,65);
+                {%- else -%}
+                    background-color: rgb(62,214,96);
+                {%- endif -%}
+            {%- endif -%}
+         {% endif %}
+        }
+      {% endfor %}
       .section-{{ section.id }}-padding {
-        padding-top: {{ section.settings.padding_top }}px;
-        padding-bottom: {{ section.settings.padding_bottom }}px;
+        padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+        padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
       }
-    }
+
+      @media screen and (min-width: 750px) {
+        .section-{{ section.id }}-padding {
+          padding-top: {{ section.settings.padding_top }}px;
+          padding-bottom: {{ section.settings.padding_bottom }}px;
+        }
+      }
   {%- endstyle -%}
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'snippet-custom-pincode-checker.js' | asset_url }}" defer="defer"></script>
   {%- if product.quantity_price_breaks_configured? -%}
     <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
@@ -186,20 +187,20 @@
                         {%- else -%}
                           {{- 'products.product.inventory_low_stock' | t -}}
                         {%- endif -%}
-                        {%- else -%}
+                      {%- else -%}
                         <svg width="15" height="15" aria-hidden="true">
                           <circle cx="7.5" cy="7.5" r="7.5" fill="rgb(62,214,96, 0.3)"/>
                             <circle cx="7.5" cy="7.5" r="5" stroke="rgb(255, 255, 255)" stroke-width="1" fill="rgb(62,214,96)"/>
-                            </svg>
-                            {%- if block.settings.show_inventory_quantity -%}
-                              {{-
-                                'products.product.inventory_in_stock_show_count'
-                                | t: quantity: product.selected_or_first_available_variant.inventory_quantity
-                                -}}
-                                {%- else -%}
-                                {{- 'products.product.inventory_in_stock' | t -}}
-                              {%- endif -%}
-                            {%- endif -%}
+                        </svg>
+                        {%- if block.settings.show_inventory_quantity -%}
+                          {{-
+                            'products.product.inventory_in_stock_show_count'
+                            | t: quantity: product.selected_or_first_available_variant.inventory_quantity
+                          -}}
+                        {%- else -%}
+                          {{- 'products.product.inventory_in_stock' | t -}}
+                        {%- endif -%}
+                      {%- endif -%}
                     {%- else -%}
                       {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
                         <svg width="15" height="15" aria-hidden="true">
@@ -238,8 +239,8 @@
                 {%- endunless -%}
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
-                    <h2 class = "h2">About the Product</h2>
-                    <div id ="">{{ product.description }}</div>
+                    <h2 class="h2">About the Product</h2>
+                    <div id="">{{ product.description }}</div>
                   </div>
                 {%- endif -%}
                 <div id="customProductDescription">
@@ -249,40 +250,60 @@
                       <details>
                         <summary>
                           <div class="product_details_heading">
-                          <svg class="icon icon-accordion" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                            <path d="M7.63356 11.3048L7.5176 11.294C6.03849 11.1571 5.29894 11.0885 5.06402 10.5732C4.82911 10.0581 5.25496 9.43836 6.10668 8.19914L9.57517 3.15246C10.1378 2.33379 10.41921.92446 10.6618 2.01151C10.9044 2.09854 10.8718 2.59709 10.8065 3.5942L10.6098 6.60011C10.5504 7.50746 10.5207 7.96113 10.7767 8.26644C11.0327 8.57175 11.4773 8.61292 12.3664 8.69524L12.4824 8.70598C13.9615 8.84293 14.7011 8.91141 14.936 9.42665C15.1709 9.94194 14.745 10.5616 13.8933 11.8008L10.4248 16.8475C9.86215 17.6661 9.58082 18.0755 9.33819 17.9885C9.09556 17.9014 9.12819 17.4029 9.19346 16.4058L9.39021 13.3999C9.4496 12.4925 9.4793 12.0389 9.22331 11.7335C8.96733 11.4282 8.52274 11.3871 7.63356 11.3048Z"></path>
-                          </svg>
-                        <h2 class = "h2">Product Details</h2>
-                        <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
-                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-                        </svg>
-                      </div>
+                            <svg
+                              class="icon icon-accordion"
+                              aria-hidden="true"
+                              focusable="false"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="20"
+                              height="20"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M7.63356 11.3048L7.5176 11.294C6.03849 11.1571 5.29894 11.0885 5.06402 10.5732C4.82911 10.0581 5.25496 9.43836 6.10668 8.19914L9.57517 3.15246C10.1378 2.33379 10.41921.92446 10.6618 2.01151C10.9044 2.09854 10.8718 2.59709 10.8065 3.5942L10.6098 6.60011C10.5504 7.50746 10.5207 7.96113 10.7767 8.26644C11.0327 8.57175 11.4773 8.61292 12.3664 8.69524L12.4824 8.70598C13.9615 8.84293 14.7011 8.91141 14.936 9.42665C15.1709 9.94194 14.745 10.5616 13.8933 11.8008L10.4248 16.8475C9.86215 17.6661 9.58082 18.0755 9.33819 17.9885C9.09556 17.9014 9.12819 17.4029 9.19346 16.4058L9.39021 13.3999C9.4496 12.4925 9.4793 12.0389 9.22331 11.7335C8.96733 11.4282 8.52274 11.3871 7.63356 11.3048Z"></path>
+                            </svg>
+                            <h2 class="h2">Product Details</h2>
+                            <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
+                            </svg>
+                          </div>
                         </summary>
-                        <p class ="product_details">
-                          <div id="metafieldsVariant">{{ product.selected_or_first_available_variant.metafields.custom.variant_description }}</div>
+                        <p class="product_details">
+                          <div id="metafieldsVariant">
+                            {{ product.selected_or_first_available_variant.metafields.custom.variant_description }}
+                          </div>
                         </p>
                       </details>
                     </div>
                   {%- endif -%}
-    
+
                   {%- if product.selected_or_first_available_variant.metafields.custom.variant_shipping != blank -%}
                     <hr>
                     <div class="product_details">
                       <details>
                         <summary>
                           <div class="product_details_heading">
-                            <svg class="icon icon-accordion" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                            <svg
+                              class="icon icon-accordion"
+                              aria-hidden="true"
+                              focusable="false"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="20"
+                              height="20"
+                              viewBox="0 0 20 20"
+                            >
                               <path d="M18.5 1.5H1.5L1.5 18.5H18.5V1.5ZM1.5 0.5C0.947715 0.5 0.5 0.947715 0.5 1.5V18.5C0.5 19.0523 0.947715 19.5 1.5 19.5H18.5C19.0523 19.5 19.5 19.0523 19.5 18.5V1.5C19.5 0.947715 19.0523 0.5 18.5 0.5H1.5Z" fill-rule="evenodd"></path>
                               <path d="M14.9975 6.09084C15.201 6.27746 15.2147 6.59375 15.0281 6.79728L8.91631 13.4627C8.82231 13.5652 8.68987 13.6239 8.55079 13.6247C8.41172 13.6256 8.27857 13.5684 8.18335 13.4671L4.99513 10.0731C4.80606 9.87179 4.81596 9.55536 5.01723 9.3663C5.21849 9.17723 5.53492 9.18713 5.72399 9.3884L8.54335 12.3897L14.291 6.12145C14.4776 5.91791 14.7939 5.90421 14.9975 6.09084Z"></path>
                             </svg>
-                        <h2 class = "h2">Shipping And Return</h2>
-                        <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
-                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
-                        </svg>
-                      </div>
+                            <h2 class="h2">Shipping And Return</h2>
+                            <svg aria-hidden="true" focusable="false" class="icon icon-caret" viewBox="0 0 10 6">
+                              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path>
+                            </svg>
+                          </div>
                         </summary>
                         <p>
-                          <div id="Shipingmetafield">{{ product.selected_or_first_available_variant.metafields.custom.variant_shipping }}</div>
+                          <div id="Shipingmetafield">
+                            {{ product.selected_or_first_available_variant.metafields.custom.variant_shipping }}
+                          </div>
                         </p>
                       </details>
                     </div>
@@ -293,7 +314,8 @@
                   class="product__sku no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
                   id="Sku-{{ section.id }}"
                   role="status"
-                  {{ block.shopify_attributes }}form
+                  {{ block.shopify_attributes -}}
+                  form
                 >
                   <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
                   {{- product.selected_or_first_available_variant.sku -}}
@@ -319,7 +341,6 @@
                   </details>
                 </div>
               {%- when 'quantity_selectorss' -%}
-             
                 <div
                   id="Quantity-Form-{{ section.id }}"
                   class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
@@ -553,7 +574,7 @@
 
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
-              {%  when "discount_coupon" %}
+              {% when 'discount_coupon' %}
                 <div id="customDiscountCoupon">
                   {% if product.selected_or_first_available_variant.metafields.custom.coupon_code %}
                     <div class="discoupon-coupon_content-{{block.id }} discoupon-coupon_content">
@@ -561,23 +582,27 @@
                         {{ block.settings.discount_coupon_text }}
                       </h2>
                       <div class="discount-coupon_code-text-and-button">
-                        <div class="discount-coupon_code" id="couponCode">{{ product.selected_or_first_available_variant.metafields.custom.coupon_code }}</div>
-                        <button class="discount-coupon_copy-code-button" id="copyCodeButton" onClick="copyCode()">Copy Code</button>
+                        <div class="discount-coupon_code" id="couponCode">
+                          {{ product.selected_or_first_available_variant.metafields.custom.coupon_code }}
+                        </div>
+                        <button class="discount-coupon_copy-code-button" id="copyCodeButton" onClick="copyCode()">
+                          Copy Code
+                        </button>
                       </div>
                     </div>
                     <script>
                       function copyCode() {
-                        const customCopyCodeButton = document.querySelector('#copyCodeButton')
-                        const copyText = document.querySelector("#couponCode")
+                        const customCopyCodeButton = document.querySelector('#copyCodeButton');
+                        const copyText = document.querySelector('#couponCode');
                         copyText.textContent;
-                        console.log(copyText.textContent)
+                        console.log(copyText.textContent);
                         navigator.clipboard.writeText(copyText.textContent);
-                        customCopyCodeButton.style.backgroundColor = 'orange'
-                        customCopyCodeButton.textContent = 'Copied'
-                        setTimeout(()=>{
-                          customCopyCodeButton.style.backgroundColor = '#ffffff'
-                        customCopyCodeButton.textContent = 'Copy Code'
-                        }, 2000)
+                        customCopyCodeButton.style.backgroundColor = 'orange';
+                        customCopyCodeButton.textContent = 'Copied';
+                        setTimeout(() => {
+                          customCopyCodeButton.style.backgroundColor = '#ffffff';
+                          customCopyCodeButton.textContent = 'Copy Code';
+                        }, 2000);
                       }
                     </script>
                   {% endif %}
@@ -590,10 +615,21 @@
                   section_id: section.id,
                   show_pickup_availability: true,
                   quantity_selector: true
-                -%} 
-                <label for="birthday">Birthday</label><br/>
-                <input type="date" id="birthday" name="birthday">
-                <button class="button" id="customAtcBtn" data-variant-id = {{ product.selected_or_first_available_variant.id }} data-section = {{section.id }}>Custom add to cart</button>
+                -%}
+                {% comment %}
+                  <label for="birthday">Birthday</label><br>
+                  <input type="date" id="birthday" name="birthday">
+                  <button
+                    class="button"
+                    id="customAtcBtn"
+                    data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                    data-section="{{section.id }}"
+                  >
+                    Custom add to cart
+                  </button>
+                {% endcomment %}
+
+                {% render 'custom-pincode-checker' %}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   {% liquid
@@ -2470,7 +2506,31 @@
           "id": "discount_coupon_background",
           "label": "Voucher background",
           "default": "linear-gradient(#7757Fb, #9450eb)"
-        }   
+        }
+      ]
+    },
+    {
+      "type": "pincode_checker",
+      "name": "Pincode checker",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button label",
+          "default": "Check For Delivery"
+        },
+        {
+          "type": "text",
+          "id": "pincode_available_message",
+          "label": "Pincode available message",
+          "default": "We Deliver to this Location"
+        },
+        {
+          "type": "text",
+          "id": "pincode_unavailable_message",
+          "label": "Pincode unavailable message",
+          "default": "Currently Unavailable in this Location"
+        }
       ]
     }
   ],

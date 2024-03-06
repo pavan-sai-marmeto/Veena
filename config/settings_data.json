@@ -135,6 +135,18 @@
       },
       "custom-header": {
         "type": "custom-header",
+        "blocks": {
+          "mega_menu_jbWkjP": {
+            "type": "mega_menu",
+            "settings": {
+              "mega_menu_title": "Sale",
+              "image_desktop": "shopify:\/\/shop_images\/nav--sale.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "mega_menu_jbWkjP"
+        ],
         "settings": {
           "image_desktop": "shopify:\/\/shop_images\/n_Veena.webp",
           "link_item": "levis-header-menu"

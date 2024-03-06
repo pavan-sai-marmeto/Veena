@@ -3,6 +3,7 @@
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr;
+    position: relative;
   }
   .custom-navigation-links {
     display: flex;
@@ -28,6 +29,12 @@
     align-items: center;
     gap: 10px;
   }
+
+  .mega-menu__content {
+    width: 100vw;
+    position: absolute;
+    z-index: 1;
+  }
 </style>
 
 <header class="custom-section-header">
@@ -36,35 +43,90 @@
       <ul class="custom-navigation-links">
         {% for link in section.settings.link_item.links %}
           <li>
-            {% if link.links != blank %}
+            {%- if link.links != blank -%}
               <header-menu>
-                <details>
-                  <summary>
-                    <a href="{{ link.title }}">
-                      {{ link.title }}
-                    </a>
+                <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu">
+                  <summary
+                    id="HeaderMenu-{{ link.handle }}"
+                    class="header__menu-item list-menu__item link focus-inset"
+                  >
+                    <span
+                      {%- if link.child_active %}
+                        class="header__active-menu-item"
+                      {% endif %}
+                    >
+                      {{- link.title | escape -}}
+                    </span>
+                    {% render 'icon-caret' %}
                   </summary>
-                  {% render 'icon-caret' %}
-                  <div>
-                    <ul>
-                      {% for childlink in link.links %}
+                  <div
+                    id="MegaMenu-Content-{{ forloop.index }}"
+                    class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
+                    tabindex="-1"
+                  >
+                    <ul
+                      class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
+                      role="list"
+                    >
+                      {%- for childlink in link.links -%}
                         <li>
-                          <a href="{{ childlink.title }}">{{ childlink.title }}</a>
-                          {{ childlink.links }}
-                          <ul>
-                            {% for grandchildlink in childlink.links %}
-                              <li>
-                                <a href="{{ grandchildlink.title }}">{{ grandchildlink.title }}</a>
-                              </li>
-                            {% endfor %}
-                          </ul>
+                          <a
+                            id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                            href="{{ childlink.url }}"
+                            class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
+                            {% if childlink.current %}
+                              aria-current="page"
+                            {% endif %}
+                          >
+                            {{ childlink.title | escape }}
+                          </a>
+                          {%- if childlink.links != blank -%}
+                            <ul class="list-unstyled" role="list">
+                              {%- for grandchildlink in childlink.links -%}
+                                <li>
+                                  <a
+                                    id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                    href="{{ grandchildlink.url }}"
+                                    class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
+                                    {% if grandchildlink.current %}
+                                      aria-current="page"
+                                    {% endif %}
+                                  >
+                                    {{ grandchildlink.title | escape }}
+                                  </a>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          {%- endif -%}
                         </li>
-                      {% endfor %}
+                      {%- endfor -%}
                     </ul>
+                    {% for block in section.blocks %}
+                      {% if block.settings.mega_menu_title == link.title %}
+                        {% render 'responsive-image', desktopImage: block.settings.image_desktop %}
+                      {% endif %}
+                    {% endfor %}
                   </div>
                 </details>
               </header-menu>
-            {% endif %}
+            {%- else -%}
+              <a
+                id="HeaderMenu-{{ link.handle }}"
+                href="{{ link.url }}"
+                class="header__menu-item list-menu__item link link--text focus-inset"
+                {% if link.current %}
+                  aria-current="page"
+                {% endif %}
+              >
+                <span
+                  {%- if link.current %}
+                    class="header__active-menu-item"
+                  {% endif %}
+                >
+                  {{- link.title | escape -}}
+                </span>
+              </a>
+            {%- endif -%}
           </li>
         {% endfor %}
       </ul>
@@ -107,6 +169,12 @@
       "limit": 10,
       "settings": [
         {
+          "type": "text",
+          "label": "Mega menu title",
+          "id": "mega_menu_title",
+          "info": "Mega menu will be applied to this link"
+        },
+        {
           "type": "image_picker",
           "label": "Image desktop",
           "id": "image_desktop"
@@ -115,12 +183,6 @@
           "type": "image_picker",
           "label": "Image mobile",
           "id": "image_mobile"
-        },
-        {
-          "type": "text",
-          "label": "Mega menu title",
-          "id": "mega_menu_title",
-          "info": "Mega menu will be applied to this link"
         }
       ]
     }

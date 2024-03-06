@@ -75,6 +75,14 @@
             "discount_coupon_text": "Variant specific discount",
             "discount_coupon_background": "linear-gradient(180deg, rgba(119, 87, 251, 1), rgba(148, 80, 235, 1) 100%)"
           }
+        },
+        "pincode_checker_wBqKxN": {
+          "type": "pincode_checker",
+          "settings": {
+            "button_text": "Check For Delivery",
+            "pincode_available_message": "We Deliver to this Location",
+            "pincode_unavailable_message": "Currently Unavailable in this Location"
+          }
         }
       },
       "block_order": [
@@ -87,7 +95,8 @@
         "icon_with_text_dpikXd",
         "description",
         "share",
-        "discount_coupon_WKqgWg"
+        "discount_coupon_WKqgWg",
+        "pincode_checker_wBqKxN"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -113,7 +122,7 @@
           "repeater": "{{ product.metafields.custom.custom_text_grid.value }}",
           "settings": {
             "heading_text": "{{ block.repeater.heading.value }}",
-            "heading_text_color": "#fff",
+            "heading_text_color": "#ffffff",
             "description": "<p>{{ block.repeater.description | metafield_tag }}<\/p>",
             "button_label": "{{ block.repeater.button_text.value }}",
             "button_link": "",
