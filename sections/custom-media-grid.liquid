@@ -13,15 +13,27 @@
     }
    }
 {% endstyle %}
+{% assign defaultColumnSpan = 1 %}
+{% assign defaultRowSpan = 1 %}
 
 
 {% if section.blocks.size > 0  %}
 <div class = "media-grid__main-container">  
     <div class = "page-width ">   
         <div class="media-grid--inner  padding-{{ section.id }}">
-            
             {% for block in section.blocks %}
-                <div class="media-grid--item  custom-border-radius " style="--column-span: {{ block.settings.column_span }}; --row-span: {{ block.settings.row_span }}; --column-span--mobile: {{ block.settings.column_span_mobile }};">
+              {% assign columnSpan = defaultColumnSpan %}
+              {% assign rowSpan = defaultRowSpan %}
+              
+              {% if forloop.index == 1 %}
+                {% assign columnSpan = section.settings.first_grid_span %}
+                {% assign rowSpan = section.settings.first_grid_span %}
+              {% elsif forloop.index == 2 %}
+                {% assign columnSpan = section.settings.second_grid_span %}
+                {% assign rowSpan = defaultRowSpan %}
+              {% endif %}
+
+                <div class="media-grid--item  custom-border-radius " style="--column-span: {{ columnSpan }}; --row-span: {{ rowSpan }}; --column-span--mobile: {{ block.settings.column_span_mobile }};">
                     <div class="media-grid--bg ">    
                         <img class="" src="{{ block.settings.image | image_url }}" width="" height=""  >
                     </div>
@@ -30,7 +42,6 @@
                             {% if block.settings.subheading %}
                                 <h5 class="custom-media-grid__subheading_color-{{block.id}}">{{ block.settings.subheading }}</h5>
                         {% endif %}
-                         
                         {% if block.settings.heading  %}
                                 <h4 class="h3 custom-media-grid__heading-text-{{block.id}}">{{ block.settings.heading }}</h4>
                         {%  endif %}
@@ -41,7 +52,7 @@
     
                         {% if block.settings.button_label != blank %}
                             <a
-                            class="button custom-button-secondary"
+                            class="custom-button-secondary_color"
                             href="{{block.settings.button_link }}"
                             >
                             {{ block.settings.button_label }}
@@ -51,24 +62,37 @@
                     </div>
                 </div>
                 <style>
-                    .custom-media-grid__text-alignment-{{block.id}}{
-                        text-align: {{ block.settings.text_alignment }};
+                  .custom-media-grid__text-alignment-{{block.id}} {
+                    text-align: {{ block.settings.text_alignment }};
+                  }
+              
+                  {% if forloop.index <= 2 %}
+                    .custom-media-grid__subheading_color-{{block.id}} {
+                      color: white;
                     }
-                    .custom-media-grid__subheading_color-{{block.id}}{
-                        color: {{block.settings.subheading_color}};
+                    .custom-media-grid__heading-text-{{block.id}} {
+                      color: white;
                     }
-                    .custom-media-grid__heading-text-{{block.id}}{
-                    color: {{block.settings.heading_text_color}};
+                    .custom-media-grid__description_text_color-{{block.id}} {
+                      color: white;
                     }
-                    .custom-media-grid__description_text_color-{{block.id}}{
-                        color: {{block.settings.description_text_color}};
+                  {% else %}
+                    .custom-media-grid__subheading_color-{{block.id}} {
+                      color: {{ block.settings.subheading_color }};
                     }
-                    @media only screen and (max-width: 750px) {
-                        .custom-media-grid__text-alignment-{{block.id}}{
-                            text-align: {{ block.settings.text_alignment_mobile }};
-                        }
+                    .custom-media-grid__heading-text-{{block.id}} {
+                      color: {{ block.settings.heading_text_color }};
                     }
-                    
+                    .custom-media-grid__description_text_color-{{block.id}} {
+                      color: {{ block.settings.description_text_color }};
+                    }
+                  {% endif %}
+              
+                  @media only screen and (max-width: 750px) {
+                    .custom-media-grid__text-alignment-{{block.id}} {
+                      text-align: {{ block.settings.text_alignment_mobile }};
+                    }
+                  }
                 </style> 
             {% else %}
                     <div class="media media--landscape custom-border-radius">
@@ -107,6 +131,24 @@
         "unit": "px",
         "label": "Padding bottom",
         "default": 36
+      },
+      {
+        "type": "range",
+        "id": "first_grid_span",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "label": "First Grid Span (Columns and Rows)",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "second_grid_span",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "label": "Second Grid Span (Columns)",
+        "default": 2
       }
   ],
   "blocks": [
@@ -182,7 +224,7 @@
           "type": "text",
           "id": "column_span_mobile",
           "label": "Column Span Mobile",
-          "default": "1"
+          "default": "2"
         },
         {
             "type": "select",
