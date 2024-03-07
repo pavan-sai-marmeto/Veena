@@ -114,6 +114,13 @@
         "padding_bottom": 12
       }
     },
+    "custom_bundle_k7A6Nb": {
+      "type": "custom-bundle",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "custom_text_grid_9BaqV6": {
       "type": "custom-text-grid",
       "blocks": {
@@ -199,6 +206,7 @@
   },
   "order": [
     "main",
+    "custom_bundle_k7A6Nb",
     "custom_text_grid_9BaqV6",
     "custom_media_grid_PQ93Hp",
     "related-products",

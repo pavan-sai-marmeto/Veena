@@ -225,13 +225,16 @@ class QuantityInput extends HTMLElement {
       const customAtcBtn = document.querySelector('#customAtcBtn')
       customAtcBtn.setAttribute('data-quantity', value)
     }
-    const customBtn = document.querySelector('#customAtcBtn')
-    customBtn.setAttribute('data-quantity', value);
-    const addButtonText = document.querySelector('[name="add"] > span');
-    const price = document.getElementById(`price-${this.dataset.section}`);
-    const currentPrice = price.querySelector('.price-item').textContent;
-    const finalPrice = value*parseInt(currentPrice.split("Rs. ")[1].split('.')[0].replace(/,/g, ''));
-    addButtonText.textContent = window.variantStrings.addToCart + " Rs. " + finalPrice;
+    if(document.querySelector('#customAtcBtn')){
+
+      const customBtn = document.querySelector('#customAtcBtn')
+      customBtn.setAttribute('data-quantity', value);
+      const addButtonText = document.querySelector('[name="add"] > span');
+      const price = document.getElementById(`price-${this.dataset.section}`);
+      const currentPrice = price.querySelector('.price-item').textContent;
+      const finalPrice = value*parseInt(currentPrice.split("Rs. ")[1].split('.')[0].replace(/,/g, ''));
+      addButtonText.textContent = window.variantStrings.addToCart + " Rs. " + finalPrice;
+    }
   }
 }
 
@@ -1331,10 +1334,11 @@ class VariantSelects extends HTMLElement {
               : this.dataset.section
           }`
         );
-        
-        const customAtcBtn = document.querySelector('#customAtcBtn')
-        customAtcBtn.setAttribute('data-variant-id', requestedVariantId)
-        document.querySelector("#customProductDescription").innerHTML = html.querySelector("#customProductDescription").innerHTML;
+        if(document.querySelector('#customAtcBtn')){
+          const customAtcBtn = document.querySelector('#customAtcBtn')
+          customAtcBtn.setAttribute('data-variant-id', requestedVariantId)
+          document.querySelector("#customProductDescription").innerHTML = html.querySelector("#customProductDescription").innerHTML;
+        }
         if(document.querySelector("#customDiscountCoupon")){
           document.querySelector("#customDiscountCoupon").innerHTML = html.querySelector("#customDiscountCoupon").innerHTML;
         }

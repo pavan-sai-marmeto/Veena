@@ -3,6 +3,11 @@
   flex-direction: column;
   margin-bottom: 10px;
 }
+.product-card__checkbox{
+  position: absolute;
+  top: 3%;
+  right: 2%;
+}
 
 @media screen and (min-width: 750px) {
   .product-list__section-heading-container{
@@ -12,3 +17,4 @@
     
   }
 }
+
