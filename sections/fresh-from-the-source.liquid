@@ -40,8 +40,8 @@
       <ul class="fresh-source__collection-tabs">
         {% for block in section.blocks %}
           <li
-            class="fresh-source__collection {% if forloop.first %}active{% endif %}"
-            data-tab="{{ block.id }}"
+            class="fresh-source__collection-tab {% if forloop.index == 1 %}active-tab{% endif %}"
+            data-tab-id="{{ block.id }}"
           >
             {{ block.settings.collection_title }}
           </li>
@@ -50,7 +50,7 @@
     </div>
     <div>
         {% for block in section.blocks %}
-      <custom-slider data-index="{{ block.id }}" class="fresh-source__collection-content {% if forloop.index == 1 %}active-collection{% endif %}">
+      <custom-slider data-collection-id="{{ block.id }}" class="fresh-source__collection-content {% if forloop.index == 1 %}active-collection{% endif %}">
         <section
           class="splide custom-border-radius"
           aria-label="Slide Show"

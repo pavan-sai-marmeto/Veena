@@ -17,15 +17,19 @@
   background-color: rgb(245, 248, 250);
   border: none;
   border-radius: 20px;
+  cursor: pointer;
 }
-.fresh-source__collection {
+.fresh-source__collection-tab {
   padding: 10px 20px;
   border-radius: 20px;
 }
-.fresh-source__collection-tabs li.active {
+.fresh-source__collection-tabs li.active-tab {
   background-color: #f0f0f0;
   color: #333;
 }
-.active-collection{
+.fresh-source__collection-content{
     display: none;
+}
+.active-collection{
+    display: block;
 }
