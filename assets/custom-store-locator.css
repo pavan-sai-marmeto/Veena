@@ -1,1 +1,21 @@
+.custom-store-locator__filter {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.custom-store-locator__button {
+  height: 50px;
+  width: 300px;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #000000;
+}
 
+.custom-store-locator__list-item {
+  padding: 10px;
+  background-color: rgb(249, 205, 140);
+}
