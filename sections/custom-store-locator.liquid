@@ -2,41 +2,45 @@
 
 {{ 'custom-store-locator.css' | asset_url | stylesheet_tag }}
 
-<div class="custom-store-locator">
+<div class="store-locator">
   <div class="page-width">
-    <div class="custom-store-locator__section-heading">
+    <div class="store-locator__section-heading">
       {% if section.settings.section_heading != blank %}
-        <h2 class="h1 {{ section.settings.heading_horizontal_position }}">{{ section.settings.section_heading }}</h2>
+        <h2 class="h1">{{ section.settings.section_heading }}</h2>
       {% endif %}
     </div>
-    <div class="custom-store-locator__loctor">
-      <div class="custom-store-locator__input-container">
-        <div class="custom-store-locator__input grid grid grid--1-col grid--3-col-desktop">
-          <div class="custom-store-locator__category-container custom-store-locator__filter grid__item">
-            <label> Category </label>
-            <select id="category-list">
-              <option>Select Category</option>
-            </select>
+    <div class="store-locator__loctor">
+      <div class="store-locator__input-container">
+        <div class="store-locator__input grid grid--3-col-desktop">
+          <div class="store-locator__category-container grid__item">
+            <label>
+              <select id="category-list">
+                <option>Select Category</option>
+              </select>
+            </label>
           </div>
-          <div class="custom-store-locator__state-container custom-store-locator__filter grid__item">
-            <label> State </label>
-            <select id="state-list">
-              <option>Select State</option>
-            </select>
+          <div class="store-locator__state-container grid__item">
+            <label>
+              <select id="state-list">
+                <option>Select State</option>
+              </select>
+            </label>
           </div>
-          <div class="custom-store-locator__city-container custom-store-locator__filter grid__item">
-            <label> City </label>
-            <select id="city-list">
-              <option>Select City</option>
-            </select>
+          <div class="store-locator__city-container grid__item">
+            <label>
+              City
+              <select id="city-list">
+                <option>Select City</option>
+              </select>
+            </label>
           </div>
         </div>
         <div>
-          <button class="custom-store-locator__button" id="locator-button">Show Results</button>
+          <button class="button" id="locator-button">Show Results</button>
         </div>
       </div>
-      <div class="custom-store-locator__locations">
-        <ul class="custom-store-locator__locations-list grid grid--4-col-desktop" id="locations-list"></ul>
+      <div class="store-locator__locations">
+        <ul class="store-locator__locations-list grid grid--4-col-desktop" id="locations-list"></ul>
       </div>
     </div>
   </div>
@@ -52,28 +56,9 @@
       "label": "section heading",
       "id": "section_heading",
       "default": "Store Loacator"
-    },
-    {
-      "type": "select",
-      "label": "Heading horizontal position",
-      "id": "heading_horizontal_position",
-      "default": "center",
-      "options": [
-        {
-          "label": "Left",
-          "value": "left"
-        },
-        {
-          "label": "Center",
-          "value": "center"
-        },
-        {
-          "label": "Right",
-          "value": "right"
-        }
-      ]
     }
   ],
+  "blocks": [],
   "presets": [
     {
       "name": "store locator"

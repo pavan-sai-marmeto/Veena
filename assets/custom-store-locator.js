@@ -135,11 +135,11 @@ async function getData() {
         locationListEl.innerHTML = "";
         locationData.forEach((each) => {
           locationListEl.innerHTML += `
-                <li class="custom-store-locator__list-item grid__item">
-                  <div class="custom-store-locator__heading h3">${each[2]}</div>
-                  <div class="custom-store-locator__place h4">${each[9]}</div>
-                  <div class="custom-store-locator__timer h5">${each[8]}</div>
-                  <div class="custom-store-locator__phone h6">${each[11]}</div>
+                <li class="store-locator__list-item grid__item">
+                  <h2 class="store-locator__heading">${each[2]}</h2>
+                  <h2 class="store-locator__place">${each[9]}</h2>
+                  <h2 class="store-locator__timer">${each[8]}</h2>
+                  <h2 class="store-locator__phone">${each[11]}</h2>
                   <a href="tel:${each[11]}">
                     <button class="loction-call" >Call Store</button>
                   </a>
