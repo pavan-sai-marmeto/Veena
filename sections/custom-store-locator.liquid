@@ -1,62 +1,57 @@
+<script src="{{ 'custom-store-locator.js' | asset_url }}" defer="defer"></script>
+
 {{ 'custom-store-locator.css' | asset_url | stylesheet_tag }}
-<script src="{{ "custom-store-locator.js" | asset_url}}" defer></script>
 
-{% style %}
-  S
-  .padding-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top | divided_by: 2  }}px;
-      padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
-    }
-
-    @media (min-width: 750px) {
-      .padding-{{ section.id }} {
-        padding-top: {{ section.settings.padding_top }}px;
-        padding-bottom: {{ section.settings.padding_bottom }}px;
-      }
-    }
-{% endstyle %}
-
-<div class="custom-store-locator padding-{{ section.id }}">
+<div class="custom-store-locator">
   <div class="page-width">
-    <store-locator>
-      <h1 class="custom-store-locator__heading {{ section.settings.heading_horizontal_position }}">
-        {{ section.settings.section_heading }}
-      </h1>
-      <div class="grid grid--1-col grid--4-col-desktop">
-        <div class="grid__item custom-store-locator__filter">
-          <label class="custom-store-locator__filter-label"> Category </label>
-          <select name="category" id="category" class="custom-store-locator__filter-type"></select>
+    <div class="custom-store-locator__section-heading">
+      {% if section.settings.section_heading != blank %}
+        <h2 class="h1 {{ section.settings.heading_horizontal_position }}">{{ section.settings.section_heading }}</h2>
+      {% endif %}
+    </div>
+    <div class="custom-store-locator__loctor">
+      <div class="custom-store-locator__input-container">
+        <div class="custom-store-locator__input grid grid--3-col-desktop">
+          <div class="custom-store-locator__category-container custom-store-locator__filter grid__item">
+            <label> Category </label>
+            <select id="category-list">
+              <option>Select Category</option>
+            </select>
+          </div>
+          <div class="custom-store-locator__state-container custom-store-locator__filter grid__item">
+            <label> State </label>
+            <select id="state-list">
+              <option>Select State</option>
+            </select>
+          </div>
+          <div class="custom-store-locator__city-container custom-store-locator__filter grid__item">
+            <label> City </label>
+            <select id="city-list">
+              <option>Select City</option>
+            </select>
+          </div>
         </div>
-        <div class="grid__item custom-store-locator__filter">
-          <label class="custom-store-locator__filter-label"> State </label>
-          <select name="state" id="state" class="custom-store-locator__filter-type" onchange="findCityList()">
-            <option>Select state</option>
-          </select>
-        </div>
-        <div class="grid__item custom-store-locator__filter">
-          <label class="custom-store-locator__filter-label"> City </label>
-          <select name="city" id="city" class="custom-store-locator__filter-type">
-            <option>Select city</option>
-          </select>
-        </div>
-        <div class="grid__item">
-          <button type="button" class="custom-button">Show results</button>
+        <div>
+          <button class="button" id="locator-button">Show Results</button>
         </div>
       </div>
-    </store-locator>
+      <div class="custom-store-locator__locations">
+        <ul class="custom-store-locator__locations-list grid grid--4-col-desktop" id="locations-list"></ul>
+      </div>
+    </div>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Store locator",
+  "name": "store locator",
   "tag": "section",
   "settings": [
     {
       "type": "text",
-      "label": "Section heading",
+      "label": "section heading",
       "id": "section_heading",
-      "default": "Store Locator"
+      "default": "Store Loacator"
     },
     {
       "type": "select",
@@ -77,35 +72,11 @@
           "value": "right"
         }
       ]
-    },
-    {
-      "type": "header",
-      "content": "Section padding settings"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "Section padding top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "label": "Section padding bottom",
-      "default": 36
     }
   ],
   "presets": [
     {
-      "name": "Store locator"
+      "name": "store locator"
     }
   ]
 }

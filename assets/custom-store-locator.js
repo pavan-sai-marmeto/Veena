@@ -1,73 +1,155 @@
-// Store locator custom element
+async function getData() {
+  const API_KEY = "AIzaSyCBhewbeu1FV2o4LQkbfSkSCgGM0oRa8jQ";
+  const SPREADSHEET_ID = "1YliWZ-Gu8mC99Bts_LhOkRjMQz1bEHhZL9_0ECjXyEI";
+  const RANGE = "Sheet1";
+  const BASE_URL = `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${RANGE}`;
+  const queryString = `?key=${API_KEY}&majorDimension=ROWS&valueRenderOption=FORMATTED_VALUE&dateTimeRenderOption=FORMATTED_STRING`;
 
-class StoreLocator extends HTMLElement {
-  constructor() {
-    super();
-    this.sheetKey = "1Kvt0NMl4rrIlQWVRjfg6URO2CCeQulS_-e82AIA6-hg";
-    this.apiKey = "AIzaSyD0s1O9edKJ1ujT7701zAxGJsEPsgWlp6A";
-    this.sheetUrl =
-      "https://sheets.googleapis.com/v4/spreadsheets/" +
-      this.sheetKey +
-      "/values/Sheet1?key=" +
-      this.apiKey;
-    this.getSheetData();
-    this.sheetData = JSON.parse(localStorage.getItem("sheet_data"));
-    this.getCategories();
-    this.getStatesData();
-  }
-  getStatesData() {
-    let categoryEl = document.querySelector("#category");
-    categoryEl.addEventListener("change", function () {
-      getStatesData(this.value);
-    });
-  }
-  getStatesData(value) {
-    let statesData = this.sheetData.slice(1).map((each) => each);
-    let states = [];
-    console.log(statesData);
-    for (let each of statesData) {
-      if (statesData[1] === value) {
-        if (states.includes(each)) {
-          continue;
-        } else {
-          states.push(each);
+  const url = `${BASE_URL}${queryString}`;
+  return fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      // Store the data in local storage
+      // localStorage.setItem('pincodeSheetData', JSON.stringify(data));
+      // return data;
+      // console.log(data)
+      const rows = data.values;
+      const [header, ...dataRows] = rows;
+      // console.log(dataRows)
+
+      let userSelection = [];
+
+      const unqCategory = [];
+      const unqState = [];
+      const unqCity = [];
+      const categoryResult = dataRows.find((row) => {
+        if (!unqCategory.includes(row[1])) {
+          unqCategory.push(row[1]);
         }
-      }
-    }
-    let stateOptions = `<option class="custom-store-locator__filter-option" value="Select Category">Select state</option>`;
-    for (let each of states) {
-      stateOptions += `<option class="custom-store-locator__category-option" value=${each}>${each}</option>`;
-    }
-    console.log(states);
-    let stateEl = document.querySelector("#state");
-    stateEl.innerHTML = stateOptions;
-  }
-  getCategories() {
-    let categoriesData = this.sheetData.slice(1).map((each) => each[1]);
-    let categories = [];
-    for (let each of categoriesData) {
-      if (categories.includes(each)) {
-        continue;
-      } else {
-        categories.push(each);
-      }
-    }
-    let CategoryOptions = `<option class="custom-store-locator__filter-option" value="Select Category">Select Category</option>`;
-    for (let each of categories) {
-      CategoryOptions += `<option class="custom-store-locator__category-option" value=${each}>${each}</option>`;
-    }
-    let categoryEl = document.querySelector("#category");
-    categoryEl.innerHTML = CategoryOptions;
-  }
-  getSheetData() {
-    fetch(this.sheetUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        let sheetData = JSON.stringify(data.values);
-        localStorage.setItem("sheet_data", sheetData);
-      })
-      .catch((error) => console.log("Error: ", error));
-  }
+      });
+      const stateResult = dataRows.find((row) => {
+        if (!unqState.includes(row[3])) {
+          unqState.push(row[3]);
+        }
+      });
+      const cityResult = dataRows.find((row) => {
+        if (!unqCity.includes(row[4])) {
+          unqCity.push(row[4]);
+        }
+      });
+      // console.log(unqCategory)
+      // console.log(unqState)
+      // console.log(unqCity)
+
+      let cagryEl = document.getElementById("category-list");
+      let stateEl = document.getElementById("state-list");
+      let cityEl = document.getElementById("city-list");
+      let locationListEl = document.getElementById("locations-list");
+
+      unqCategory.forEach((eachCategory) => {
+        let categoryOption = document.createElement("option");
+        categoryOption.value = eachCategory;
+        categoryOption.textContent = eachCategory;
+        cagryEl.appendChild(categoryOption);
+        // console.log(eachCategory);
+      });
+
+      cagryEl.addEventListener("change", (e) => {
+        const userCategoryValue = e.target.value;
+        if (!userSelection.includes(userCategoryValue)) {
+          userSelection.push(userCategoryValue);
+        }
+        const unqState = [];
+        dataRows.find((row) => {
+          if (row[1] === userCategoryValue) {
+            if (!unqState.includes(row[3])) {
+              unqState.push(row[3]);
+            }
+          }
+        });
+        // console.log(unqState, "unqstate")
+
+        unqState.forEach((eachCategory) => {
+          let stateOption = document.createElement("option");
+          stateOption.value = eachCategory;
+          stateOption.textContent = eachCategory;
+          stateEl.appendChild(stateOption);
+          // console.log(eachCategory);
+        });
+
+        stateEl.addEventListener("change", (e) => {
+          const stateValue = e.target.value;
+
+          if (!userSelection.includes(stateValue)) {
+            userSelection.push(stateValue);
+          }
+
+          const unqCitis = [];
+          dataRows.find((row) => {
+            if (row[3] === stateValue) {
+              if (!unqCitis.includes(row[4])) {
+                unqCitis.push(row[4]);
+              }
+            }
+          });
+
+          // console.log(unqCitis)
+
+          unqCitis.forEach((eachCategory) => {
+            let cityOption = document.createElement("option");
+            cityOption.value = eachCategory;
+            cityOption.textContent = eachCategory;
+            cityEl.appendChild(cityOption);
+            // console.log(eachCategory);
+
+            cityEl.addEventListener("change", (e) => {
+              const cityValue = e.target.value;
+
+              if (!userSelection.includes(cityValue)) {
+                userSelection.push(cityValue);
+              }
+            });
+          });
+        });
+      });
+
+      let btn = document.getElementById("locator-button");
+      btn.addEventListener("click", () => {
+        const userCategoryValue = cagryEl.value;
+        const userStateValue = stateEl.value;
+        const userCityValue = cityEl.value;
+
+        let locationData = [];
+        dataRows.find((eachRow) => {
+          if (
+            eachRow[1] === userCategoryValue &&
+            eachRow[3] === userStateValue &&
+            eachRow[4] === userCityValue
+          ) {
+            locationData.push(eachRow);
+          }
+        });
+
+        console.log(locationData);
+
+        locationListEl.innerHTML = "";
+        locationData.forEach((each) => {
+          locationListEl.innerHTML += `
+                <li class="store-locator__list-item grid__item">
+                  <h2 class="store-locator__heading">${each[2]}</h2>
+                  <h2 class="store-locator__place">${each[9]}</h2>
+                  <h2 class="store-locator__timer">${each[8]}</h2>
+                  <h2 class="store-locator__phone">${each[11]}</h2>
+                  <a href="tel:${each[11]}">
+                    <button class="loction-call" >Call Store</button>
+                  </a>
+                </li>
+  
+                `;
+        });
+      });
+    })
+    .catch((error) => console.error(error));
 }
 
-customElements.define("store-locator", StoreLocator);
+getData();
