@@ -1,1 +1,41 @@
 <h1>Store Locator</h1>
+
+
+
+{% schema %}
+{
+    "name": "Store locator",
+    "tag": "section",
+    "settings": [
+        {
+            "type" : "header",
+            "content" : "Section padding settings"
+          },
+          {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Section padding top",
+            "default": 36
+          },
+          {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Section padding bottom",
+            "default": 36
+          }
+    ],
+    "presets": [
+        {
+    "name": "Store locator"
+    }
+]
+}
+{% endschema %}
