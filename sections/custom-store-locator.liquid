@@ -1,41 +1,112 @@
-<h1>Store Locator</h1>
+{{ 'custom-store-locator.css' | asset_url | stylesheet_tag }}
+<script src="{{ "custom-store-locator.js" | asset_url}}" defer></script>
 
+{% style %}
+  S
+  .padding-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | divided_by: 2  }}px;
+      padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+    }
 
+    @media (min-width: 750px) {
+      .padding-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+{% endstyle %}
+
+<div class="custom-store-locator padding-{{ section.id }}">
+  <div class="page-width">
+    <store-locator>
+      <h1 class="custom-store-locator__heading {{ section.settings.heading_horizontal_position }}">
+        {{ section.settings.section_heading }}
+      </h1>
+      <div class="grid grid--1-col grid--4-col-desktop">
+        <div class="grid__item custom-store-locator__filter">
+          <label class="custom-store-locator__filter-label"> Category </label>
+          <select name="category" id="category" class="custom-store-locator__filter-type"></select>
+        </div>
+        <div class="grid__item custom-store-locator__filter">
+          <label class="custom-store-locator__filter-label"> State </label>
+          <select name="state" id="state" class="custom-store-locator__filter-type" onchange="findCityList()">
+            <option>Select state</option>
+          </select>
+        </div>
+        <div class="grid__item custom-store-locator__filter">
+          <label class="custom-store-locator__filter-label"> City </label>
+          <select name="city" id="city" class="custom-store-locator__filter-type">
+            <option>Select city</option>
+          </select>
+        </div>
+        <div class="grid__item">
+          <button type="button" class="custom-button">Show results</button>
+        </div>
+      </div>
+    </store-locator>
+  </div>
+</div>
 
 {% schema %}
 {
-    "name": "Store locator",
-    "tag": "section",
-    "settings": [
+  "name": "Store locator",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Section heading",
+      "id": "section_heading",
+      "default": "Store Locator"
+    },
+    {
+      "type": "select",
+      "label": "Heading horizontal position",
+      "id": "heading_horizontal_position",
+      "default": "center",
+      "options": [
         {
-            "type" : "header",
-            "content" : "Section padding settings"
-          },
-          {
-            "type": "range",
-            "id": "padding_top",
-            "min": 0,
-            "max": 100,
-            "step": 1,
-            "unit": "px",
-            "label": "Section padding top",
-            "default": 36
-          },
-          {
-            "type": "range",
-            "id": "padding_bottom",
-            "min": 0,
-            "max": 100,
-            "step": 1,
-            "unit": "px",
-            "label": "Section padding bottom",
-            "default": 36
-          }
-    ],
-    "presets": [
+          "label": "Left",
+          "value": "left"
+        },
         {
-    "name": "Store locator"
+          "label": "Center",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Section padding settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Section padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Section padding bottom",
+      "default": 36
     }
-]
+  ],
+  "presets": [
+    {
+      "name": "Store locator"
+    }
+  ]
 }
 {% endschema %}

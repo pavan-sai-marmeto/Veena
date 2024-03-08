@@ -220,20 +220,22 @@ class QuantityInput extends HTMLElement {
       const max = parseInt(this.input.max);
       const buttonPlus = this.querySelector(".quantity__button[name='plus']");
       buttonPlus.classList.toggle("disabled", value >= max);
-    }  
-    if(document.querySelector('#customAtcBtn')){
-      const customAtcBtn = document.querySelector('#customAtcBtn')
-      customAtcBtn.setAttribute('data-quantity', value)
     }
-    if(document.querySelector('#customAtcBtn')){
-
-      const customBtn = document.querySelector('#customAtcBtn')
-      customBtn.setAttribute('data-quantity', value);
+    if (document.querySelector("#customAtcBtn")) {
+      const customAtcBtn = document.querySelector("#customAtcBtn");
+      customAtcBtn.setAttribute("data-quantity", value);
+    }
+    if (document.querySelector("#customAtcBtn")) {
+      const customBtn = document.querySelector("#customAtcBtn");
+      customBtn.setAttribute("data-quantity", value);
       const addButtonText = document.querySelector('[name="add"] > span');
       const price = document.getElementById(`price-${this.dataset.section}`);
-      const currentPrice = price.querySelector('.price-item').textContent;
-      const finalPrice = value*parseInt(currentPrice.split("Rs. ")[1].split('.')[0].replace(/,/g, ''));
-      addButtonText.textContent = window.variantStrings.addToCart + " Rs. " + finalPrice;
+      const currentPrice = price.querySelector(".price-item").textContent;
+      const finalPrice =
+        value *
+        parseInt(currentPrice.split("Rs. ")[1].split(".")[0].replace(/,/g, ""));
+      addButtonText.textContent =
+        window.variantStrings.addToCart + " Rs. " + finalPrice;
     }
   }
 }
@@ -1334,13 +1336,15 @@ class VariantSelects extends HTMLElement {
               : this.dataset.section
           }`
         );
-        if(document.querySelector('#customAtcBtn')){
-          const customAtcBtn = document.querySelector('#customAtcBtn')
-          customAtcBtn.setAttribute('data-variant-id', requestedVariantId)
-          document.querySelector("#customProductDescription").innerHTML = html.querySelector("#customProductDescription").innerHTML;
+        if (document.querySelector("#customAtcBtn")) {
+          const customAtcBtn = document.querySelector("#customAtcBtn");
+          customAtcBtn.setAttribute("data-variant-id", requestedVariantId);
+          document.querySelector("#customProductDescription").innerHTML =
+            html.querySelector("#customProductDescription").innerHTML;
         }
-        if(document.querySelector("#customDiscountCoupon")){
-          document.querySelector("#customDiscountCoupon").innerHTML = html.querySelector("#customDiscountCoupon").innerHTML;
+        if (document.querySelector("#customDiscountCoupon")) {
+          document.querySelector("#customDiscountCoupon").innerHTML =
+            html.querySelector("#customDiscountCoupon").innerHTML;
         }
         const skuSource = html.getElementById(
           `Sku-${
@@ -1578,47 +1582,45 @@ customElements.define("custom-slider", CustomSlider);
 //functionality of custom add to cart button with id customAtcBtn start
 
 if (document.querySelector("#customAtcBtn")) {
-  document
-    .querySelector("#customAtcBtn")
-    .addEventListener("click", (event) => {
-      let customButton = event.target;
-      const variantId = customButton.dataset.variantId;
-      const quantity = customButton.dataset.quantity;
-      const cart =
-        document.querySelector("cart-drawer") ||
-        document.querySelector("cart-notification");
-      console.log(variantId)
-      console.log(quantity)
-      console.log(cart)
-      let formData = {
-        items: [
-          {
-            id: variantId,
-            quantity: quantity,
-            properties: {
-              DOB: `${document.querySelector('#birthday').value}`
-            }
+  document.querySelector("#customAtcBtn").addEventListener("click", (event) => {
+    let customButton = event.target;
+    const variantId = customButton.dataset.variantId;
+    const quantity = customButton.dataset.quantity;
+    const cart =
+      document.querySelector("cart-drawer") ||
+      document.querySelector("cart-notification");
+    console.log(variantId);
+    console.log(quantity);
+    console.log(cart);
+    let formData = {
+      items: [
+        {
+          id: variantId,
+          quantity: quantity,
+          properties: {
+            DOB: `${document.querySelector("#birthday").value}`,
           },
-        ],
-        sections: cart.getSectionsToRender().map((section) => section.id),
-      };
-      fetch("/cart/add.js", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+      ],
+      sections: cart.getSectionsToRender().map((section) => section.id),
+    };
+    fetch("/cart/add.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        return response.json();
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((jsonData) => {
-          cart.renderContents(jsonData);
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-        });
-    });
+      .then((jsonData) => {
+        cart.renderContents(jsonData);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  });
 }
 
 //custom add to cart button with id customAtcBtn end

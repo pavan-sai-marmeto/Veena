@@ -1,0 +1,36 @@
+.custom-store-locator__heading {
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.custom-store-locator__filter {
+  display: flex;
+  flex-direction: column;
+}
+.custom-store-locator__filter {
+  padding: 5px 10px 5px;
+  border: 1px solid rgb(182, 180, 180);
+  border-radius: 5px;
+  width: 100%;
+}
+.custom-store-locator__filter-type {
+  border: none;
+  outline: none;
+}
+.custom-store-locator__filter-option {
+  color: #000000;
+  font-weight: 400;
+}
+.custom-store-locator__filter-label {
+  color: rgb(138, 136, 136);
+  font-size: 12px;
+}
+.custom-button {
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  background-color: #000000;
+}
