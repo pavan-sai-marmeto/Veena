@@ -10,6 +10,8 @@
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
   {{ 'custom-coupon-code.css' | asset_url | stylesheet_tag }}
+  {{ 'custom-bundle.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'custom-bundle.js' | asset_url}}" defer></script>
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
     {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
@@ -218,7 +220,6 @@
                     {%- endif -%}
                   {%- endif -%}
                 </p>
-
 
               {%- when 'description' -%}
                 {%- unless shop.enabled_payment_types == empty -%}
@@ -630,7 +631,32 @@
                   </button>
                 {% endcomment %}
 
-                {% render 'custom-pincode-checker' %}
+                {% comment %} {% render 'custom-pincode-checker' %} {% endcomment %}
+              {% when 'custom_bundle' %}
+                {% if product.metafields.custom.custom_bundle.value %}
+                  <div>
+                    <h2 class="h3">{{ block.settings.bundle_heding }}</h2>
+                    <div class="">
+                      <ul class="custom-bundle__products-list grid grid--3-col-desktop">
+                        {% for product in product.metafields.custom.custom_bundle.value %}
+                          <li class="grid__item custom-bundle__list-item">
+                            {% render 'custom-product-card', product: product %}
+                            <div class="custom-bundle__checkbox">
+                              <input
+                                type="checkbox"
+                                class="custom-bundle__checkbox-input"
+                                data-product-id="{{product.selected_or_first_available_variant.id }}"
+                              >
+                            </div>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                      <div>
+                        <button class="button" id="custom-add-to-cart">Add To Cart</button>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   {% liquid
@@ -2531,6 +2557,18 @@
           "id": "pincode_unavailable_message",
           "label": "Pincode unavailable message",
           "default": "Currently Unavailable in this Location"
+        }
+      ]
+    },
+    {
+      "type": "custom_bundle",
+      "name": "Custom Product Bundle",
+      "settings": [
+        {
+          "type": "text",
+          "id": "bundle_heding",
+          "label": "Bundle Heading",
+          "default": "Frequently Bought Together"
         }
       ]
     }
