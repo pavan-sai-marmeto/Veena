@@ -83,6 +83,12 @@
             "pincode_available_message": "We Deliver to this Location",
             "pincode_unavailable_message": "Currently Unavailable in this Location"
           }
+        },
+        "custom_bundle_jrxkit": {
+          "type": "custom_bundle",
+          "settings": {
+            "bundle_heding": "Frequently Bought Together"
+          }
         }
       },
       "block_order": [
@@ -96,7 +102,8 @@
         "description",
         "share",
         "discount_coupon_WKqgWg",
-        "pincode_checker_wBqKxN"
+        "pincode_checker_wBqKxN",
+        "custom_bundle_jrxkit"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -112,13 +119,6 @@
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 12
-      }
-    },
-    "custom_bundle_k7A6Nb": {
-      "type": "custom-bundle",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "custom_text_grid_9BaqV6": {
@@ -176,7 +176,9 @@
       ],
       "settings": {
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 36,
+        "first_grid_span": 2,
+        "second_grid_span": 2
       }
     },
     "related-products": {
@@ -206,7 +208,6 @@
   },
   "order": [
     "main",
-    "custom_bundle_k7A6Nb",
     "custom_text_grid_9BaqV6",
     "custom_media_grid_PQ93Hp",
     "related-products",
