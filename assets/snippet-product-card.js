@@ -1,15 +1,15 @@
+
+
 class ProductCard extends HTMLElement {
   constructor() {
     super();
     this.productHandle = this.dataset.productHandle;
     this.sectionId = this.dataset.sectionId;
-
     this.variantData = JSON.parse(this.querySelector("script").textContent);
-
     this.addEventListener("change", this.onVariantChange);
   }
 
-  async onVariantChange() {
+  onVariantChange() {
     this.selectedOptions = Array.from(
       this.querySelectorAll("input[type=radio]:checked"),
       (input) => input.value
@@ -18,6 +18,9 @@ class ProductCard extends HTMLElement {
       (item) =>
         JSON.stringify(item.options) == JSON.stringify(this.selectedOptions)
     );
+    console.log('current variant id: ',this.currentVariant.id)
+    this.selectedId = document.querySelector('input[name="id"]').value;
+    console.log('selected id: ',this.selectedId);
 
     this.getUpdatedCard();
   }
@@ -29,9 +32,10 @@ class ProductCard extends HTMLElement {
       .then((response) => response.text())
       .then((responseText) => {
         const html = new DOMParser().parseFromString(responseText, "text/html");
-        this.innerHTML = html.querySelector(
-          `[data-product-handle="${this.productHandle}"]`
-        ).innerHTML;
+        // this.innerHTML = html.querySelector(
+        //   `[data-product-handle="${this.productHandle}"]`
+        // ).innerHTML;a
+        this.innerHTML=html.querySelector('product-card').innerHTML
       });
   }
 }

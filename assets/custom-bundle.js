@@ -10,18 +10,23 @@ document.querySelector("#custom-add-to-cart").addEventListener("click", () => {
         });
       }
     });
-  console.log(productItems);
+    const customAddToCartEl = document.querySelector('#custom-add-to-cart');
+    if(customAddToCartEl){
+      productItems.push({
+        id: customAddToCartEl.dataset.variantId,
+        quantity: customAddToCartEl.dataset.quantity
+      })
+    }
 
   const cart =
     document.querySelector("cart-notification") ||
     document.querySelector("cart-drawer");
-  console.log(cart);
+
 
   let formData = {
     items: productItems,
     sections: cart.getSectionsToRender().map((section) => section.id),
   };
-  console.log(formData);
 
   fetch(window.Shopify.routes.root + "cart/add.js", {
     method: "POST",
@@ -32,7 +37,6 @@ document.querySelector("#custom-add-to-cart").addEventListener("click", () => {
   })
     .then((response) => response.json())
     .then((res) => {
-      console.log(res);
       cart.renderContents(res);
     })
     .catch((error) => {
