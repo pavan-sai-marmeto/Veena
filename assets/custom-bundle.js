@@ -10,18 +10,17 @@ document.querySelector("#custom-add-to-cart").addEventListener("click", () => {
         });
       }
     });
-    const customAddToCartEl = document.querySelector('#custom-add-to-cart');
-    if(customAddToCartEl){
-      productItems.push({
-        id: customAddToCartEl.dataset.variantId,
-        quantity: customAddToCartEl.dataset.quantity
-      })
-    }
+  const customAddToCartEl = document.querySelector("#custom-add-to-cart");
+  if (customAddToCartEl) {
+    productItems.push({
+      id: customAddToCartEl.dataset.variantId,
+      quantity: customAddToCartEl.dataset.quantity,
+    });
+  }
 
   const cart =
     document.querySelector("cart-notification") ||
     document.querySelector("cart-drawer");
-
 
   let formData = {
     items: productItems,

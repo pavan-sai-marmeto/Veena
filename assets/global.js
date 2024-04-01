@@ -237,9 +237,9 @@ class QuantityInput extends HTMLElement {
       addButtonText.textContent =
         window.variantStrings.addToCart + " Rs. " + finalPrice;
     }
-    const customAddToCartEl = document.querySelector('#custom-add-to-cart');
-    if(customAddToCartEl){
-      customAddToCartEl.dataset.quantity = value
+    const customAddToCartEl = document.querySelector("#custom-add-to-cart");
+    if (customAddToCartEl) {
+      customAddToCartEl.dataset.quantity = value;
     }
   }
 }
@@ -1313,8 +1313,8 @@ class VariantSelects extends HTMLElement {
 
   renderProductInfo() {
     const requestedVariantId = this.currentVariant.id;
-    const customAddToCartEl = document.querySelector('#custom-add-to-cart');
-    if(customAddToCartEl){
+    const customAddToCartEl = document.querySelector("#custom-add-to-cart");
+    if (customAddToCartEl) {
       customAddToCartEl.dataset.variantId = requestedVariantId;
     }
     const sectionId = this.dataset.originalSection

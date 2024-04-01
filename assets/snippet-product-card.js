@@ -1,5 +1,3 @@
-
-
 class ProductCard extends HTMLElement {
   constructor() {
     super();
@@ -18,10 +16,7 @@ class ProductCard extends HTMLElement {
       (item) =>
         JSON.stringify(item.options) == JSON.stringify(this.selectedOptions)
     );
-    console.log('current variant id: ',this.currentVariant.id)
-    this.selectedId = document.querySelector('input[name="id"]').value;
-    console.log('selected id: ',this.selectedId);
-
+    console.log("current variant id: ", this.currentVariant.id);
     this.getUpdatedCard();
   }
 
@@ -35,7 +30,7 @@ class ProductCard extends HTMLElement {
         // this.innerHTML = html.querySelector(
         //   `[data-product-handle="${this.productHandle}"]`
         // ).innerHTML;a
-        this.innerHTML=html.querySelector('product-card').innerHTML
+        this.innerHTML = html.querySelector("product-card").innerHTML;
       });
   }
 }

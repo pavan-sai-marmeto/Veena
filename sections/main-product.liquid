@@ -652,7 +652,14 @@
                         {% endfor %}
                       </ul>
                       <div>
-                        <button class="button" id="custom-add-to-cart" dat-variant-id="{{product.selected_or_first_available_variant.id }}" data-quantity=1>Add To Cart</button>
+                        <button
+                          class="button"
+                          id="custom-add-to-cart"
+                          dat-variant-id="{{product.selected_or_first_available_variant.id }}"
+                          data-quantity="1"
+                        >
+                          Add To Cart
+                        </button>
                       </div>
                     </div>
                   </div>
