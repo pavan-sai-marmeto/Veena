@@ -1,0 +1,112 @@
+{{ "section-custom-feedback-form.css" |  asset_url |  stylesheet_tag }}
+
+<h1 class="h1 form-title">Feedback Form</h1>
+<div class="container">
+  <form id="myForm" method="POST" action="https://script.google.com/macros/s/AKfycbyNSosY_QF-VITcNXQCi_zXUDmuu8U7svur9i5P15TuHxyf7NPeCYERbFhcgo-q5T8u/exec">
+    <div class="form-group">
+      <label for="Name">Name</label>
+      <input type="text" id="name" name="Name" placeholder="Enter your name" required>
+    </div>
+    <div class="form-group">
+      <label for="Phone-Number">Phone Number</label>
+      <input type="number" id="phone" name="Number" placeholder="Enter your phone number" required>
+    </div>
+    <div class="form-group">
+      <label for="Rating">Your service rating</label>
+      <div class="rating">
+        <input type="radio" id="star5" name="Rating" value="5" ><label for="star5">☆</label>
+        <input type="radio" id="star4" name="Rating" value="4"><label for="star4">☆</label>
+        <input type="radio" id="star3" name="Rating" value="3"><label for="star3">☆</label>
+        <input type="radio" id="star2" name="Rating" value="2"><label for="star2">☆</label>
+        <input type="radio" id="star1" name="Rating" value="1"><label for="star1">☆</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="Feedback">Additional Feedback</label>
+      <textarea id="feedback" name="Feedback" placeholder="If you have any additional feedback, please type it in here..." required></textarea>
+    </div>
+    <div class="form-group checkbox">
+      <input type="checkbox" id="privacy_policy" name="Policy">
+      <label for="privacy_policy">I have read and accept the Privacy Policy.</label>
+    </div>
+    <button type="submit" class="submit-btn">Submit feedback</button>
+  </form>
+</div> 
+
+
+{% schema %}
+	{
+		"name": "feedback-form",
+		"settings": [
+			{
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+			},
+			{
+				"type": "range",
+				"id": "padding_top",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_top",
+				"default": 36
+			},
+			{
+				"type": "range",
+				"id": "padding_bottom",
+				"min": 0,
+				"max": 100,
+				"step": 4,
+				"unit": "px",
+				"label": "t:sections.all.padding.padding_bottom",
+				"default": 36
+			}
+		]
+	}
+{% endschema %}
+
+
+{% comment %} {% layout "none" %}
+
+{{ 'section-custom-feedback-form.css' | asset_url | stylesheet_tag }}
+
+<div class="page-width">
+    <form method="POST" action="https://script.google.com/macros/s/AKfycbyjT8DabyX6kwcn0X8py-As8HlB2NNlqSp9fIfNWKbKSuGXAwEjxhxPjipiG5RYV4Fc/exec">
+      <div class="grid grid--1-col">
+         <div class="field  grid__item">
+          <label class="field__label" for="googleName">Name</label>
+          <input name="Name" type="text" id="googleName" placeholder="Name" class="field__input" required>
+        </div>
+        <div class="field grid__item">
+          <label class="field__label" for="mobile_number">Phone number</label>
+          <input name="Mobile" type="tel" id="mobile_number" placeholder="Mobile number" class="field__input" required>
+        </div>
+        <div class="field  grid__item">
+            <p>Your service rating</p>
+            <select name="Rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div>
+            <p>Feedback</p>
+            <textarea name="Feedback" cols="60" rows="8"></textarea>
+        </div>
+        </div>
+      <button class="button" type="submit">Send</button>
+    </form>  
+  </div>
+  {% schema %}
+    {
+      "name": "Google Sheet Form",
+      "presets": [
+        {
+          "name": "Google Sheet Form"
+        }
+      ]
+    }
+  {% endschema %} {% endcomment %}
