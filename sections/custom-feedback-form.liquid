@@ -1,42 +1,61 @@
 {{ "section-custom-feedback-form.css" |  asset_url |  stylesheet_tag }}
 
-<h1 class="h1 form-title">Feedback Form</h1>
-<div class="container">
-  <form id="myForm" method="POST" action="https://script.google.com/macros/s/AKfycbyNSosY_QF-VITcNXQCi_zXUDmuu8U7svur9i5P15TuHxyf7NPeCYERbFhcgo-q5T8u/exec">
-    <div class="form-group">
-      <label for="Name">Name</label>
-      <input type="text" id="name" name="Name" placeholder="Enter your name" required>
+{% style %}
+  .padding-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .padding-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="padding-{{section.id}}">
+  <div class="page-width">
+    <h1 class="h1 form-title">Feedback Form</h1>
+    <div class="container">
+      <form id="myForm" method="POST" action="https://script.google.com/macros/s/AKfycbyNSosY_QF-VITcNXQCi_zXUDmuu8U7svur9i5P15TuHxyf7NPeCYERbFhcgo-q5T8u/exec">
+        <div class="form-group">
+          <label for="Name">Name</label>
+          <input type="text" id="name" name="Name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group">
+          <label for="Phone-Number">Phone Number</label>
+          <input type="number" id="phone" name="Number" placeholder="Enter your phone number" required>
+        </div>
+        <div class="form-group">
+          <label for="Rating">Your service rating</label>
+          <div class="rating">
+            <input type="radio" id="star5" name="Rating" value="5" ><label for="star5">☆</label>
+            <input type="radio" id="star4" name="Rating" value="4"><label for="star4">☆</label>
+            <input type="radio" id="star3" name="Rating" value="3"><label for="star3">☆</label>
+            <input type="radio" id="star2" name="Rating" value="2"><label for="star2">☆</label>
+            <input type="radio" id="star1" name="Rating" value="1"><label for="star1">☆</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="Feedback">Additional Feedback</label>
+          <textarea id="feedback" name="Feedback" placeholder="If you have any additional feedback, please type it in here..." required></textarea>
+        </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="privacy_policy" name="Policy">
+          <label for="privacy_policy">I have read and accept the Privacy Policy.</label>
+        </div>
+        <button type="submit" class="submit-btn">Submit feedback</button>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="Phone-Number">Phone Number</label>
-      <input type="number" id="phone" name="Number" placeholder="Enter your phone number" required>
-    </div>
-    <div class="form-group">
-      <label for="Rating">Your service rating</label>
-      <div class="rating">
-        <input type="radio" id="star5" name="Rating" value="5" ><label for="star5">☆</label>
-        <input type="radio" id="star4" name="Rating" value="4"><label for="star4">☆</label>
-        <input type="radio" id="star3" name="Rating" value="3"><label for="star3">☆</label>
-        <input type="radio" id="star2" name="Rating" value="2"><label for="star2">☆</label>
-        <input type="radio" id="star1" name="Rating" value="1"><label for="star1">☆</label>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="Feedback">Additional Feedback</label>
-      <textarea id="feedback" name="Feedback" placeholder="If you have any additional feedback, please type it in here..." required></textarea>
-    </div>
-    <div class="form-group checkbox">
-      <input type="checkbox" id="privacy_policy" name="Policy">
-      <label for="privacy_policy">I have read and accept the Privacy Policy.</label>
-    </div>
-    <button type="submit" class="submit-btn">Submit feedback</button>
-  </form>
-</div> 
+  </div>
+</div>
+ 
 
 
 {% schema %}
 	{
-		"name": "feedback-form",
+		"name": "Feedback form",
 		"settings": [
 			{
       "type": "header",
@@ -62,6 +81,11 @@
 				"label": "t:sections.all.padding.padding_bottom",
 				"default": 36
 			}
-		]
+		],
+    "presets": [
+      {
+        "name": "Feedback form"
+      }
+    ]
 	}
 {% endschema %}
