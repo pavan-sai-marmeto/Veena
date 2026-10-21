@@ -9,7 +9,7 @@
         <div class="splide__track">
           <ul class="splide__list">
             {% for block in section.blocks %}
-              <li class="splide__slide {% cycle 'margin-top', 'odd' as row_class %}">
+              <li class="splide__slide {% cycle 'margin-top', 'odd' %}">
                 <img class="timeline-logo" src="https://www.orientelectric.com/theme/Orient/img/bg-as-tn.png" alt="timeline" height="30" width="30" />
                 <div class="thumbnail-slider__timeline-description">
                     <h2>{{ block.settings.timeline_year }}</h2>
@@ -167,4 +167,13 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% cycle 'margin-top', 'odd' as row_class %}"
+  to: "{% cycle 'margin-top', 'odd' %}"
+  position: 462..493
+{%- endcomment -%}

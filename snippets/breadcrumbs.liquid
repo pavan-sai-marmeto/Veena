@@ -35,7 +35,7 @@
       </li>
 
       {%- case template_name -%}
-        {%- when 'collection' and collection.handle -%}
+        {%- when 'collection' -%}
           <li class="breadcrumbs__listitem">
             <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
           </li>
@@ -72,3 +72,13 @@
     </ol>
   </nav>
 {%- endunless -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- when 'collection' and collection.handle -%}"
+  to: "{%- when 'collection' -%}"
+  position: 827..852
+{% endcomment %}
